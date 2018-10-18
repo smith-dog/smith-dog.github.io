@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="本文是对redis常用数据结构的总结，不涉及应用，参考文档http://redisdoc.com/index.html 列表结构特点：有序，可以重复，左右弹出    指令 指令使用 时间复杂度 指令说明     rpush rpush key value1 value2 … valueN o(1~n) 右增   lpush lpush key value1 value2 … valueN o(1~">
+<meta name="description" content="本文是对redis常用数据结构的总结，不涉及应用，参考文档http://redisdoc.com/index.html 列表结构特点：有序，可以重复，左右弹出">
 <meta name="keywords" content="cache,redis,structure">
 <meta property="og:type" content="article">
 <meta property="og:title" content="redis深度历险（一）">
 <meta property="og:url" content="http://yoursite.com/2018/09/29/redis-深度历险（一）/index.html">
 <meta property="og:site_name" content="smith-dog">
-<meta property="og:description" content="本文是对redis常用数据结构的总结，不涉及应用，参考文档http://redisdoc.com/index.html 列表结构特点：有序，可以重复，左右弹出    指令 指令使用 时间复杂度 指令说明     rpush rpush key value1 value2 … valueN o(1~n) 右增   lpush lpush key value1 value2 … valueN o(1~">
+<meta property="og:description" content="本文是对redis常用数据结构的总结，不涉及应用，参考文档http://redisdoc.com/index.html 列表结构特点：有序，可以重复，左右弹出">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-09-29T14:30:59.069Z">
+<meta property="og:updated_time" content="2018-10-18T09:11:49.216Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="redis深度历险（一）">
-<meta name="twitter:description" content="本文是对redis常用数据结构的总结，不涉及应用，参考文档http://redisdoc.com/index.html 列表结构特点：有序，可以重复，左右弹出    指令 指令使用 时间复杂度 指令说明     rpush rpush key value1 value2 … valueN o(1~n) 右增   lpush lpush key value1 value2 … valueN o(1~">
+<meta name="twitter:description" content="本文是对redis常用数据结构的总结，不涉及应用，参考文档http://redisdoc.com/index.html 列表结构特点：有序，可以重复，左右弹出">
 
 
 
@@ -394,79 +394,7 @@
 
       
         <p>本文是对redis常用数据结构的总结，不涉及应用，参考文档<a href="http://redisdoc.com/index.html" target="_blank" rel="noopener">http://redisdoc.com/index.html</a></p>
-<h4 id="列表结构"><a href="#列表结构" class="headerlink" title="列表结构"></a>列表结构</h4><p>特点：有序，可以重复，左右弹出</p>
-<table>
-<thead>
-<tr>
-<th>指令</th>
-<th style="text-align:center">指令使用</th>
-<th style="text-align:right">时间复杂度</th>
-<th>指令说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>rpush</td>
-<td style="text-align:center">rpush key value1 value2 … valueN</td>
-<td style="text-align:right">o(1~n)</td>
-<td>右增</td>
-</tr>
-<tr>
-<td>lpush</td>
-<td style="text-align:center">lpush key value1 value2 … valueN</td>
-<td style="text-align:right">o(1~n)</td>
-<td>左增</td>
-</tr>
-<tr>
-<td>linsert</td>
-<td style="text-align:center">linsert key before/after value newValue</td>
-<td style="text-align:right">o(n)</td>
-<td>插入</td>
-</tr>
-<tr>
-<td>lpop/rpop</td>
-<td style="text-align:center">lpop key   (左弹出)/rpop key   (右弹出)</td>
-<td style="text-align:right">o(1)</td>
-<td>删除</td>
-</tr>
-<tr>
-<td>lrem</td>
-<td style="text-align:center">lrem key count value</td>
-<td style="text-align:right">o(n)</td>
-<td>删除(删除指定个数的元素，相同的元素)</td>
-</tr>
-<tr>
-<td>ltrim</td>
-<td style="text-align:center">ltrim key start end</td>
-<td style="text-align:right">o(1~n)</td>
-<td>裁剪(按照索引范围修剪列表)</td>
-</tr>
-<tr>
-<td>lrange</td>
-<td style="text-align:center">lrange key start end (包含end)</td>
-<td style="text-align:right">o（n）</td>
-<td>获取列表指定索引范围所有item</td>
-</tr>
-<tr>
-<td>index</td>
-<td style="text-align:center">index key index</td>
-<td style="text-align:right">o(n)</td>
-<td>获取列表指定下标的元素</td>
-</tr>
-<tr>
-<td>llen</td>
-<td style="text-align:center">llen key</td>
-<td style="text-align:right">o(1)</td>
-<td>获取列表长度</td>
-</tr>
-<tr>
-<td>lset</td>
-<td style="text-align:center">lset key index newValue</td>
-<td style="text-align:right">o(n)</td>
-<td>设置列表指定索引值为指定值</td>
-</tr>
-</tbody>
-</table>
+<h4 id="列表结构"><a href="#列表结构" class="headerlink" title="列表结构"></a>列表结构</h4><p>特点：有序，可以重复，左右弹出<br><a id="more"></a><br>|指令|指令使用|时间复杂度|指令说明|<br>|—|:–:|—:|<br>|rpush|rpush key value1 value2 … valueN  | o(1~n)|右增|<br>|lpush|lpush key value1 value2 … valueN  | o(1~n)|左增|<br>|linsert|linsert key before/after value newValue | o(n)|插入|<br>|lpop/rpop|lpop key   (左弹出)/rpop key   (右弹出)|o(1)|删除|<br>|lrem |lrem key count value  |o(n)|删除(删除指定个数的元素，相同的元素)|<br>|ltrim|ltrim key start end|o(1~n)|裁剪(按照索引范围修剪列表)|<br>|lrange|lrange key start end (包含end) | o（n）|获取列表指定索引范围所有item|<br>|index |index key index | o(n) | 获取列表指定下标的元素 |<br>|llen|llen key | o(1) | 获取列表长度|<br>|lset|lset key index newValue | o(n) | 设置列表指定索引值为指定值|</p>
 <p>lrem指令说明</p>
 <blockquote>
 <p>1、count &gt;0 ,从左到右，删除最多count个value相等的项<br>2、count&lt;0，从右到左，删除最多Math.abs(count)个value相等的项<br>3、count=0, 删除所有value相等的项</p>

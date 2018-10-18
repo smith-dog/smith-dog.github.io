@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="最近公司要用到的测试环境多，变化也多，干脆就直接从linux迁移到docker，服务的部署也很快  [TOC] docker环境12345yum -y install docker-io# 开启dockerservice docker start# 设置开机启动systemctl enable docker // 使用阿里云容器加速，创建容器-镜像加速器，/etc/docker/daemon.j">
+<meta name="description" content="最近公司要用到的测试环境多，变化也多，干脆就直接从linux迁移到docker，服务的部署也很快  docker环境12345yum -y install docker-io# 开启dockerservice docker start# 设置开机启动systemctl enable docker">
 <meta property="og:type" content="article">
 <meta property="og:title" content="从linux部署迁移到docker部署">
 <meta property="og:url" content="http://yoursite.com/2018/10/18/从linux部署迁移到docker部署/index.html">
 <meta property="og:site_name" content="smith-dog">
-<meta property="og:description" content="最近公司要用到的测试环境多，变化也多，干脆就直接从linux迁移到docker，服务的部署也很快  [TOC] docker环境12345yum -y install docker-io# 开启dockerservice docker start# 设置开机启动systemctl enable docker // 使用阿里云容器加速，创建容器-镜像加速器，/etc/docker/daemon.j">
+<meta property="og:description" content="最近公司要用到的测试环境多，变化也多，干脆就直接从linux迁移到docker，服务的部署也很快  docker环境12345yum -y install docker-io# 开启dockerservice docker start# 设置开机启动systemctl enable docker">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-10-18T08:50:03.956Z">
+<meta property="og:updated_time" content="2018-10-18T09:10:11.114Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="从linux部署迁移到docker部署">
-<meta name="twitter:description" content="最近公司要用到的测试环境多，变化也多，干脆就直接从linux迁移到docker，服务的部署也很快  [TOC] docker环境12345yum -y install docker-io# 开启dockerservice docker start# 设置开机启动systemctl enable docker // 使用阿里云容器加速，创建容器-镜像加速器，/etc/docker/daemon.j">
+<meta name="twitter:description" content="最近公司要用到的测试环境多，变化也多，干脆就直接从linux迁移到docker，服务的部署也很快  docker环境12345yum -y install docker-io# 开启dockerservice docker start# 设置开机启动systemctl enable docker">
 
 
 
@@ -362,8 +362,8 @@
         <blockquote>
 <p>最近公司要用到的测试环境多，变化也多，干脆就直接从linux迁移到docker，服务的部署也很快</p>
 </blockquote>
-<p>[TOC]</p>
 <h4 id="docker环境"><a href="#docker环境" class="headerlink" title="docker环境"></a>docker环境</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">yum -y install docker-io</span><br><span class="line"># 开启docker</span><br><span class="line">service docker start</span><br><span class="line"># 设置开机启动</span><br><span class="line">systemctl enable docker</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
 <p>// 使用阿里云容器加速，创建容器-镜像加速器，/etc/docker/daemon.json<br><a href="http://dev.aliyun.com/" target="_blank" rel="noopener">http://dev.aliyun.com/</a>  </p>
 <p>// 使用私有docker仓库，/etc/docker/daemon.json<br>{ “insecure-registries”:[“[ServerIP]:[port]”]}</p>
 <h4 id="docker指令"><a href="#docker指令" class="headerlink" title="docker指令"></a>docker指令</h4><h5 id="进入容器"><a href="#进入容器" class="headerlink" title="进入容器"></a>进入容器</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it [id] /bin/bash</span><br></pre></td></tr></table></figure>

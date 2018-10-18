@@ -281,6 +281,311 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/18/从linux部署迁移到docker部署/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="smith-dog">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="smith-dog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/18/从linux部署迁移到docker部署/" itemprop="url">从linux部署迁移到docker部署</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-18T11:20:25+08:00">
+                2018-10-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/10/18/从linux部署迁移到docker部署/" class="leancloud_visitors" data-flag-title="从linux部署迁移到docker部署">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>最近公司要用到的测试环境多，变化也多，干脆就直接从linux迁移到docker，服务的部署也很快</p>
+</blockquote>
+<p>[TOC]</p>
+<h4 id="docker环境"><a href="#docker环境" class="headerlink" title="docker环境"></a>docker环境</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">yum -y install docker-io</span><br><span class="line"># 开启docker</span><br><span class="line">service docker start</span><br><span class="line"># 设置开机启动</span><br><span class="line">systemctl enable docker</span><br></pre></td></tr></table></figure>
+<p>// 使用阿里云容器加速，创建容器-镜像加速器，/etc/docker/daemon.json<br><a href="http://dev.aliyun.com/" target="_blank" rel="noopener">http://dev.aliyun.com/</a>  </p>
+<p>// 使用私有docker仓库，/etc/docker/daemon.json<br>{ “insecure-registries”:[“[ServerIP]:[port]”]}</p>
+<h4 id="docker指令"><a href="#docker指令" class="headerlink" title="docker指令"></a>docker指令</h4><h5 id="进入容器"><a href="#进入容器" class="headerlink" title="进入容器"></a>进入容器</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker exec -it [id] /bin/bash</span><br></pre></td></tr></table></figure>
+<h5 id="安装vim"><a href="#安装vim" class="headerlink" title="安装vim"></a>安装vim</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt-get update</span><br><span class="line">apt-get install -y vim</span><br></pre></td></tr></table></figure>
+<h5 id="查看日志"><a href="#查看日志" class="headerlink" title="查看日志"></a>查看日志</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker logs -f [id]</span><br></pre></td></tr></table></figure>
+<h5 id="镜像操作"><a href="#镜像操作" class="headerlink" title="镜像操作"></a>镜像操作</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker images </span><br><span class="line">docker rmi [imagesId]</span><br></pre></td></tr></table></figure>
+<h5 id="容器操作"><a href="#容器操作" class="headerlink" title="容器操作"></a>容器操作</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rm [id]</span><br></pre></td></tr></table></figure>
+<h4 id="jdk-dockerfile"><a href="#jdk-dockerfile" class="headerlink" title="jdk-dockerfile"></a>jdk-dockerfile</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">FROM ubuntu:latest</span><br><span class="line">MAINTAINER Robustel leng &quot;liangzh@robustel.cn&quot;</span><br><span class="line"></span><br><span class="line">RUN mkdir -p /jvm</span><br><span class="line">ADD jdk-8u25-linux-x64.gz /jvm</span><br><span class="line">ENV JAVA_HOME /jvm/jdk1.8.0_25</span><br><span class="line">ENV JRE_HOME /jvm/jdk1.8.0_25/jre</span><br><span class="line">ENV CLASSPATH .:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar:$JRE_HOME/lib</span><br><span class="line">ENV PATH $PATH:$JAVA_HOME/bin:$JRE_HOME/bin</span><br></pre></td></tr></table></figure>
+<h4 id="安装nginx"><a href="#安装nginx" class="headerlink" title="安装nginx"></a>安装nginx</h4><h5 id="dockerfile"><a href="#dockerfile" class="headerlink" title="dockerfile"></a>dockerfile</h5><p>基础镜像<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">#nginx</span><br><span class="line">#Version 1.0</span><br><span class="line"></span><br><span class="line">FROM ubuntu:latest</span><br><span class="line">MAINTAINER Robustel Leng &lt;liangzh@robustel.cn&gt;</span><br><span class="line"></span><br><span class="line">ENV SOFT_PATH /opt</span><br><span class="line">ENV INSTALL_PATH /usr/local</span><br><span class="line">ADD openssl-1.0.2l.tar.gz $SOFT_PATH</span><br><span class="line">ADD pcre-8.40.tar.gz $SOFT_PATH</span><br><span class="line">ADD nginx-1.14.0.tar.gz $SOFT_PATH</span><br><span class="line">ADD zlib-1.2.11.tar.gz $SOFT_PATH</span><br><span class="line">COPY Shanghai /etc/localtime</span><br><span class="line"></span><br><span class="line">RUN apt-get update &amp;&amp; \</span><br><span class="line">    apt-get -y upgrade &amp;&amp; \</span><br><span class="line">    apt-get install -y gcc g++ &amp;&amp; \</span><br><span class="line">    apt-get install -y make gzip zip perl unzip &amp;&amp; \</span><br><span class="line">    echo &apos;Asia/Shanghai&apos; &gt;/etc/timezone &amp;&amp; \</span><br><span class="line">    mkdir -p /usr/local/nginx &amp;&amp; \</span><br><span class="line">    cd $SOFT_PATH/nginx-1.14.0 &amp;&amp; \</span><br><span class="line">    make &amp;&amp; make install &amp;&amp; \</span><br><span class="line">    rm -rf $SOFT_PATH/*</span><br><span class="line"></span><br><span class="line">ENV PATH $PATH:$INSTALL_PATH/nginx/sbin</span><br><span class="line">EXPOSE 80 443</span><br><span class="line"></span><br><span class="line">CMD [&quot;nginx&quot;,&quot;-g&quot;,&quot;daemon off;&quot;]</span><br></pre></td></tr></table></figure></p>
+<p>高级镜像<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#nginx</span><br><span class="line">#Version 1.0</span><br><span class="line"></span><br><span class="line">FROM nginx:1.14.0</span><br><span class="line">docker run -d \</span><br><span class="line">--name tomcat_pl \</span><br><span class="line">-v /opt/server/tomcats/docker-tomcat/tomcat_pl/webapps:/usr/local/apache-tomcat-8.5.32/webapps \</span><br><span class="line">-v /opt/server/tomcats/docker-tomcat/tomcat_pl/logs:/usr/local/logs \</span><br><span class="line">--restart always \</span><br><span class="line">--privileged=true \</span><br><span class="line">--link zookeeper3.4:dubboServer \</span><br><span class="line">--link activemq5.14:mqServer \</span><br><span class="line">--add-host mysqlServer:172.16.0.15 \</span><br><span class="line">--add-host mongoServer:172.16.0.15 \</span><br><span class="line">--link redis4.0:redisServer 172.16.18.20:5000/tomcat_pl:v7</span><br></pre></td></tr></table></figure></p>
+<h5 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">docker run --name -d nginx10.0 \</span><br><span class="line">--privileged=true \</span><br><span class="line">-p 80:80 -p 443:443 \</span><br><span class="line">-v /opt/nginx/html:/usr/local/nginx/html \</span><br><span class="line">-v /opt/nginx/conf/nginx.conf:/usr/local/nginx/conf/nginx.conf  \</span><br><span class="line">-v /opt/nginx/ssl:/usr/local/nginx/ssl \</span><br><span class="line">-v /opt/nginx/logs:/var/log/nginx \</span><br><span class="line">-v /opt/nginx/conf.d:/etc/nginx/conf.d \</span><br><span class="line">--restart=always \</span><br><span class="line">-d [ServerIP]:[port]/nginx:v10</span><br></pre></td></tr></table></figure>
+<h4 id="安装zookeeper"><a href="#安装zookeeper" class="headerlink" title="安装zookeeper"></a>安装zookeeper</h4><h5 id="dockerfile-1"><a href="#dockerfile-1" class="headerlink" title="dockerfile"></a>dockerfile</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">FROM ubuntu:latest</span><br><span class="line">MAINTAINER Robustel leng &quot;liangzh@robustel.cn&quot;</span><br><span class="line"></span><br><span class="line">ADD zookeeper-3.4.13.tar.gz /opt</span><br><span class="line">COPY Shanghai /etc/localtime</span><br><span class="line">RUN apt-get update &amp;&amp; \</span><br><span class="line">    apt-get install -y openjdk-8-jre-headless &amp;&amp; \</span><br><span class="line">    mv /opt/zookeeper-3.4.13 /opt/zookeeper &amp;&amp; \</span><br><span class="line">    cp /opt/zookeeper/conf/zoo_sample.cfg /opt/zookeeper/conf/zoo.cfg &amp;&amp; \</span><br><span class="line">    echo &apos;Asia/Shanghai&apos; &gt; /etc/timezone</span><br><span class="line"></span><br><span class="line">EXPOSE 2181 2888 3888</span><br><span class="line"></span><br><span class="line">CMD [&quot;/opt/zookeeper/bin/zkServer.sh&quot;,&quot;start-foreground&quot;]</span><br></pre></td></tr></table></figure>
+<h5 id="安装-1"><a href="#安装-1" class="headerlink" title="安装"></a>安装</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --name zookeeper3.4 -p 2181:2181 --restart always [ServerIP]:[port]/zookeeper:v3.4</span><br></pre></td></tr></table></figure>
+<h4 id="安装redis"><a href="#安装redis" class="headerlink" title="安装redis"></a>安装redis</h4><h5 id="dockerfile-2"><a href="#dockerfile-2" class="headerlink" title="dockerfile"></a>dockerfile</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">FROM ubuntu:latest</span><br><span class="line">MAINTAINER Robustel leng &quot;liangzh@robustel.cn&quot;</span><br><span class="line"></span><br><span class="line">RUN mkdir -p /data/redis/tmp/redis_data &amp;&amp; \</span><br><span class="line">    touch /data/redis/redis.log</span><br><span class="line"></span><br><span class="line">ADD redis-4.0.10.tar.gz /data/</span><br><span class="line">COPY Shanghai /etc/localtime</span><br><span class="line"></span><br><span class="line">RUN apt-get update &amp;&amp; \</span><br><span class="line">    apt-get  -y upgrade &amp;&amp; \</span><br><span class="line">    apt-get install -y tcl &amp;&amp; \</span><br><span class="line">    apt-get install -y gcc g++ &amp;&amp;\</span><br><span class="line">    apt-get install -y make &amp;&amp; \</span><br><span class="line">    cd /data/redis-4.0.10 &amp;&amp; \</span><br><span class="line">    make &amp;&amp; \</span><br><span class="line">    make test &amp;&amp; \</span><br><span class="line">    make install PRIFIX=/data/redis &amp;&amp; \</span><br><span class="line">    echo &apos;Asia/Shanghai&apos; &gt;/etc/timezone &amp;&amp; \</span><br><span class="line">    rm -rf *</span><br><span class="line"></span><br><span class="line">ENV PATH $PATH:/data/redis/bin</span><br><span class="line">COPY redis.conf /data/redis/</span><br><span class="line">COPY redis_run.sh /data/redis/</span><br><span class="line"></span><br><span class="line">EXPOSE 6379</span><br><span class="line"></span><br><span class="line">CMD [&quot;/data/redis/redis_run.sh&quot;]</span><br></pre></td></tr></table></figure>
+<h5 id="安装-2"><a href="#安装-2" class="headerlink" title="安装"></a>安装</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --name redis4.0 -p 6379:6379 --restart always [ServerIP]:[port]/redis:v4.0</span><br></pre></td></tr></table></figure>
+<h4 id="安装activemq"><a href="#安装activemq" class="headerlink" title="安装activemq"></a>安装activemq</h4><h5 id="dockerfile-3"><a href="#dockerfile-3" class="headerlink" title="dockerfile"></a>dockerfile</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">FROM ubuntu:latest</span><br><span class="line">MAINTAINER Robustel leng &quot;liangzh@robustel.cn&quot;</span><br><span class="line">ADD activemq.tar.gz /usr/local/</span><br><span class="line"></span><br><span class="line">COPY Shanghai /etc/localtime</span><br><span class="line">RUN apt-get update &amp;&amp; \</span><br><span class="line">    apt-get -y upgrade &amp;&amp; \</span><br><span class="line">    apt-get install -y openjdk-8-jre-headless &amp;&amp; \</span><br><span class="line">    echo &apos;Asia/Shanghai&apos; &gt;/etc/timezone</span><br><span class="line"></span><br><span class="line">EXPOSE 61616 61614 61613 1883 1884 1887 8161 5672 21574</span><br><span class="line"></span><br><span class="line">CMD [&quot;/usr/local/activemq/bin/activemq&quot;,&quot;console&quot;]</span><br></pre></td></tr></table></figure>
+<h4 id="安装-3"><a href="#安装-3" class="headerlink" title="安装"></a>安装</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --name activemq5.14 --restart always -p 61616:61616 -p 1883:1883 -p 1884:1884 -p 1887:1887 -p 8161:8161 [ServerIP]:[port]/activemq:v5.14</span><br></pre></td></tr></table></figure>
+<h4 id="tomcat安装命令"><a href="#tomcat安装命令" class="headerlink" title="tomcat安装命令"></a>tomcat安装命令</h4><h5 id="dockerfile-4"><a href="#dockerfile-4" class="headerlink" title="dockerfile"></a>dockerfile</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">FROM jdk:1.8</span><br><span class="line">MAINTAINER Robustel leng &quot;liangzh@robustel.cn&quot;</span><br><span class="line"></span><br><span class="line">ADD apache-tomcat-8.5.32.tar.gz /usr/local/</span><br><span class="line">COPY Shanghai /etc/localtime</span><br><span class="line">RUN  echo &apos;Asia/Shanghai&apos; &gt;/etc/timezone &amp;&amp; \</span><br><span class="line">     rm -rf /usr/local/apache-tomcat-8.5.32/webapps/*</span><br><span class="line"></span><br><span class="line">ENV CATALINA_HOME /usr/local/apache-tomcat-8.5.32</span><br><span class="line">ENV PATH $CATALINA_HOME/bin:$PATH</span><br><span class="line">WORKDIR $CATALINA_HOME</span><br><span class="line"></span><br><span class="line">EXPOSE 8080 22</span><br><span class="line"></span><br><span class="line">CMD [&quot;catalina.sh&quot;, &quot;run&quot;]</span><br></pre></td></tr></table></figure>
+<h5 id="安装-4"><a href="#安装-4" class="headerlink" title="安装"></a>安装</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">docker run -d \</span><br><span class="line">--name tomcat_link_control \</span><br><span class="line">-v /opt/server/tomcats/docker-tomcat/tomcat_link_control/webapps:/usr/local/apache-tomcat-8.5.32/webapps \</span><br><span class="line">-v /opt/server/tomcats/docker-tomcat/tomcat_link_control/logs:/usr/local/logs \</span><br><span class="line">--restart always \</span><br><span class="line">--privileged=true \</span><br><span class="line">--link zookeeper3.4:dubboServer \</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>转载请注明出处</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/10/日志框架变更记录log4j-logback/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="smith-dog">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="smith-dog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/10/日志框架变更记录log4j-logback/" itemprop="url">日志框架变更记录log4j--->logback</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-10T14:43:01+08:00">
+                2018-10-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/10/10/日志框架变更记录log4j-logback/" class="leancloud_visitors" data-flag-title="日志框架变更记录log4j--->logback">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>logback<br>author: smith-dog<br>date: 2018-10-10 14:43:01</p>
+</blockquote>
+<h2 id="tags"><a href="#tags" class="headerlink" title="tags:"></a>tags:</h2><h5 id="项目实现从log4j到logback转换"><a href="#项目实现从log4j到logback转换" class="headerlink" title="项目实现从log4j到logback转换"></a>项目实现从log4j到logback转换</h5><blockquote>
+<p>附上logback官网，选择logback的原因<br><a href="https://logback.qos.ch/reasonsToSwitch.html" target="_blank" rel="noopener">https://logback.qos.ch/reasonsToSwitch.html</a></p>
+</blockquote>
+<h4 id="一、依赖以及配置"><a href="#一、依赖以及配置" class="headerlink" title="一、依赖以及配置"></a>一、依赖以及配置</h4><h6 id="maven依赖"><a href="#maven依赖" class="headerlink" title="maven依赖"></a>maven依赖</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;org.slf4j&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;slf4j-api&lt;/artifactId&gt;</span><br><span class="line">	&lt;version&gt;$&#123;slf4j.version&#125;&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;ch.qos.logback&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;logback-classic&lt;/artifactId&gt;</span><br><span class="line">	&lt;version&gt;$&#123;logback.version&#125;&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line"></span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;org.logback-extensions&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;logback-ext-spring&lt;/artifactId&gt;</span><br><span class="line">	&lt;version&gt;0.1.5&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<h6 id="logback-xml-（可以根据官网配置）"><a href="#logback-xml-（可以根据官网配置）" class="headerlink" title="logback.xml （可以根据官网配置）"></a>logback.xml （可以根据官网配置）</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;</span><br><span class="line">&lt;configuration&gt;</span><br><span class="line"></span><br><span class="line">    &lt;appender name=&quot;consoleLog&quot; class=&quot;ch.qos.logback.core.ConsoleAppender&quot;&gt;</span><br><span class="line">        &lt;layout class=&quot;ch.qos.logback.classic.PatternLayout&quot;&gt;</span><br><span class="line">            &lt;pattern&gt;</span><br><span class="line">                %d - %msg%n</span><br><span class="line">            &lt;/pattern&gt;</span><br><span class="line">        &lt;/layout&gt;</span><br><span class="line">    &lt;/appender&gt;</span><br><span class="line"></span><br><span class="line">    &lt;appender name=&quot;fileInfoLog&quot; class=&quot;ch.qos.logback.core.rolling.RollingFileAppender&quot;&gt;</span><br><span class="line">        &lt;filter class=&quot;ch.qos.logback.classic.filter.LevelFilter&quot;&gt;</span><br><span class="line">            &lt;level&gt;ERROR&lt;/level&gt;</span><br><span class="line">            &lt;onMatch&gt;DENY&lt;/onMatch&gt;</span><br><span class="line">            &lt;onMismatch&gt;ACCEPT&lt;/onMismatch&gt;</span><br><span class="line">        &lt;/filter&gt;</span><br><span class="line">        &lt;encoder&gt;</span><br><span class="line">            &lt;pattern&gt;</span><br><span class="line">                %msg%n</span><br><span class="line">            &lt;/pattern&gt;</span><br><span class="line">        &lt;/encoder&gt;</span><br><span class="line">        &lt;!--滚动策略--&gt;</span><br><span class="line">        &lt;rollingPolicy class=&quot;ch.qos.logback.core.rolling.TimeBasedRollingPolicy&quot;&gt;</span><br><span class="line">            &lt;!--路径--&gt;</span><br><span class="line">            &lt;fileNamePattern&gt;E:/workspace/log/info.%d.log&lt;/fileNamePattern&gt;</span><br><span class="line">        &lt;/rollingPolicy&gt;</span><br><span class="line">    &lt;/appender&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &lt;appender name=&quot;fileErrorLog&quot; class=&quot;ch.qos.logback.core.rolling.RollingFileAppender&quot;&gt;</span><br><span class="line">        &lt;filter class=&quot;ch.qos.logback.classic.filter.ThresholdFilter&quot;&gt;</span><br><span class="line">            &lt;level&gt;ERROR&lt;/level&gt;</span><br><span class="line">        &lt;/filter&gt;</span><br><span class="line">        &lt;encoder&gt;</span><br><span class="line">            &lt;pattern&gt;</span><br><span class="line">                %msg%n</span><br><span class="line">            &lt;/pattern&gt;</span><br><span class="line">        &lt;/encoder&gt;</span><br><span class="line">        &lt;!--滚动策略--&gt;</span><br><span class="line">        &lt;rollingPolicy class=&quot;ch.qos.logback.core.rolling.TimeBasedRollingPolicy&quot;&gt;</span><br><span class="line">            &lt;!--路径--&gt;</span><br><span class="line">            &lt;fileNamePattern&gt;E:/workspace/log/error.%d.log&lt;/fileNamePattern&gt;</span><br><span class="line">        &lt;/rollingPolicy&gt;</span><br><span class="line">    &lt;/appender&gt;</span><br><span class="line">    &lt;root level=&quot;info&quot;&gt;</span><br><span class="line">        &lt;appender-ref ref=&quot;consoleLog&quot; /&gt;</span><br><span class="line">        &lt;appender-ref ref=&quot;fileInfoLog&quot; /&gt;</span><br><span class="line">        &lt;appender-ref ref=&quot;fileErrorLog&quot; /&gt;</span><br><span class="line">    &lt;/root&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
+<h6 id="web-xml"><a href="#web-xml" class="headerlink" title="web.xml"></a>web.xml</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;context-param&gt;</span><br><span class="line">	&lt;param-name&gt;logbackConfigLocation&lt;/param-name&gt;</span><br><span class="line">	&lt;param-value&gt;classpath:logback.xml&lt;/param-value&gt;</span><br><span class="line">&lt;/context-param&gt;</span><br><span class="line">	</span><br><span class="line">&lt;listener&gt;</span><br><span class="line">	&lt;listener-class&gt;ch.qos.logback.ext.spring.web.LogbackConfigListener&lt;/listener-class&gt;</span><br><span class="line">&lt;/listener&gt;</span><br></pre></td></tr></table></figure>
+<h6 id="中间遇到的坑"><a href="#中间遇到的坑" class="headerlink" title="中间遇到的坑"></a>中间遇到的坑</h6><p>1、dubbo错误java.lang.ClassNotFoundException: org.apache.log4j.Logger</p>
+<blockquote>
+<p><a href="http://www.itsuxue.com/forum/thread-2933-1-1.html" target="_blank" rel="noopener">http://www.itsuxue.com/forum/thread-2933-1-1.html</a><br>从异常上来看，依赖的dubbo需要的class  “org.apache.log4j.Log4jLoggerFactory”在log4j-over-slf4j中，而当前项目的日志框架的运行不在是单一日志框架下的slf4j运行模式。查阅slf4j关于bridge介绍得知，log4j-over-slf4j与slf4j-log4j12无法共存。上图的协作更多的是说明单一日志框架下的slf4j解决方案。当一个项目存在多种日志框架混合的时候，slf4j提供bridge模式来支持。</p>
+</blockquote>
+<p>在项目依赖中添加<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">	&lt;groupId&gt;org.slf4j&lt;/groupId&gt;</span><br><span class="line">	&lt;artifactId&gt;log4j-over-slf4j&lt;/artifactId&gt;</span><br><span class="line">	&lt;version&gt;$&#123;log4j-over-slf4j.version&#125;&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
+<p>由于log4j-over-slf4j与slf4j-log4j12无法共存，在有冲突的地方要排除slf4j-log4j12</p>
+<blockquote>
+<p>转载注明出处</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/08/线上压测问题总结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -373,6 +678,8 @@
 <li>字符串常量都用contants类封装，否则在后期维护上会付出大量成本。</li>
 <li>魔法数字也一样需要进行封装，Enum进行封装。</li>
 <li>依赖问题，尽量依赖稳定的jar包，jar包冲突要尽早排除</li>
+<li>出现线上问题需要紧急修复，修改war包或者jar包里配置文件等，不要使用文本工具编辑，可能由于格式问题造成运行失败</li>
+<li>变成要依赖接口，而不是具体实现。（无论线上紧急更换实现，还是线下变更，都是十分有好处的）</li>
 </ul>
 <h5 id="3、慢查询"><a href="#3、慢查询" class="headerlink" title="3、慢查询"></a>3、慢查询</h5><ul>
 <li>使用索引加快查询（rcms中未使用）</li>
@@ -381,6 +688,7 @@
 </ul>
 <h5 id="4、并发"><a href="#4、并发" class="headerlink" title="4、并发"></a>4、并发</h5><ul>
 <li>项目初期要考虑并发量和人力成本，简单的架构做起来快，扩展差，后续成本高。复杂架构反之。</li>
+<li>使用中间件削峰，mq或者redis进行数据缓冲。</li>
 </ul>
 
           
@@ -1276,7 +1584,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

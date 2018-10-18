@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="smith-dog">
 <meta property="og:description" content="线上问题总结由于项目版本上线频频出现一些问题，这里总结一下 1、数据问题 模拟数据不一致，压测数据，压测数据生成的数据格式必须和版本一致，否则很容易引发一系列数据不一致问题。数据不一致的产生应该尽量避免，数据入库前应该做好校验，压测用的模拟数据生成做好校验。 开发生产环境配置，开发生产使用的是不同的环境，5套左右环境，每套的配置都不一样，配置起来也非常累人，数据库的某些字段也要手工配置加密后的字段">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-10-08T09:21:56.186Z">
+<meta property="og:updated_time" content="2018-10-10T07:00:11.148Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="线上压测问题总结">
 <meta name="twitter:description" content="线上问题总结由于项目版本上线频频出现一些问题，这里总结一下 1、数据问题 模拟数据不一致，压测数据，压测数据生成的数据格式必须和版本一致，否则很容易引发一系列数据不一致问题。数据不一致的产生应该尽量避免，数据入库前应该做好校验，压测用的模拟数据生成做好校验。 开发生产环境配置，开发生产使用的是不同的环境，5套左右环境，每套的配置都不一样，配置起来也非常累人，数据库的某些字段也要手工配置加密后的字段">
@@ -369,6 +369,8 @@
 <li>字符串常量都用contants类封装，否则在后期维护上会付出大量成本。</li>
 <li>魔法数字也一样需要进行封装，Enum进行封装。</li>
 <li>依赖问题，尽量依赖稳定的jar包，jar包冲突要尽早排除</li>
+<li>出现线上问题需要紧急修复，修改war包或者jar包里配置文件等，不要使用文本工具编辑，可能由于格式问题造成运行失败</li>
+<li>变成要依赖接口，而不是具体实现。（无论线上紧急更换实现，还是线下变更，都是十分有好处的）</li>
 </ul>
 <h5 id="3、慢查询"><a href="#3、慢查询" class="headerlink" title="3、慢查询"></a>3、慢查询</h5><ul>
 <li>使用索引加快查询（rcms中未使用）</li>
@@ -377,6 +379,7 @@
 </ul>
 <h5 id="4、并发"><a href="#4、并发" class="headerlink" title="4、并发"></a>4、并发</h5><ul>
 <li>项目初期要考虑并发量和人力成本，简单的架构做起来快，扩展差，后续成本高。复杂架构反之。</li>
+<li>使用中间件削峰，mq或者redis进行数据缓冲。</li>
 </ul>
 
       
@@ -419,6 +422,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/10/日志框架变更记录log4j-logback/" rel="prev" title="日志框架变更记录log4j--->logback">
+                日志框架变更记录log4j--->logback <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -525,7 +532,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

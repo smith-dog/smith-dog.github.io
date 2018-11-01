@@ -79,17 +79,16 @@
 
 
 
-<meta name="description" content="线上问题总结由于项目版本上线频频出现一些问题，这里总结一下">
-<meta property="og:type" content="article">
-<meta property="og:title" content="线上压测问题总结">
-<meta property="og:url" content="http://yoursite.com/2018/10/08/线上压测问题总结/index.html">
+<meta name="description" content="The road ahead is bright, keeping the unity of knowing and doing.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="smith-dog">
+<meta property="og:url" content="http://yoursite.com/archives/2018/11/index.html">
 <meta property="og:site_name" content="smith-dog">
-<meta property="og:description" content="线上问题总结由于项目版本上线频频出现一些问题，这里总结一下">
+<meta property="og:description" content="The road ahead is bright, keeping the unity of knowing and doing.">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-10-30T16:49:56.560Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="线上压测问题总结">
-<meta name="twitter:description" content="线上问题总结由于项目版本上线频频出现一些问题，这里总结一下">
+<meta name="twitter:title" content="smith-dog">
+<meta name="twitter:description" content="The road ahead is bright, keeping the unity of knowing and doing.">
 
 
 
@@ -119,13 +118,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/10/08/线上压测问题总结/"/>
+  <link rel="canonical" href="http://yoursite.com/archives/2018/11/"/>
 
 
 
 
 
-  <title>线上压测问题总结 | smith-dog</title>
+  <title>Archive | smith-dog</title>
   
 
 
@@ -153,7 +152,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container sidebar-position-left page-archive">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -267,211 +266,74 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-expand">
-    
+  
+  
+  
+  <div class="post-block archive">
+    <div id="posts" class="posts-collapse">
+      <span class="archive-move-on"></span>
 
-  
+      <span class="archive-page-counter">
+        
+        
+        
+          
+        
+        Um..! 7 posts in total. Keep on posting.
+      </span>
 
-  
-  
-  
+      
+
+        
+        
+        
+
+        
+          
+          <div class="collection-title">
+            <h1 class="archive-year" id="archive-year-2018">2018</h1>
+          </div>
+        
+        
+
+        
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/08/线上压测问题总结/">
+    <header class="post-header">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="smith-dog">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/head.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="smith-dog">
-    </span>
-
-    
-      <header class="post-header">
-
+      <h2 class="post-title">
         
-        
-          <h1 class="post-title" itemprop="name headline">线上压测问题总结</h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
+            <a class="post-title-link" href="/2018/11/01/测试/" itemprop="url">
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span itemprop="name">物联网设备接入请求</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-08T14:57:21+08:00">
-                2018-10-08
-              </time>
-            
+            </a>
+        
+      </h2>
 
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/10/08/线上压测问题总结/" class="leancloud_visitors" data-flag-title="线上压测问题总结">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        <h4 id="线上问题总结"><a href="#线上问题总结" class="headerlink" title="线上问题总结"></a>线上问题总结</h4><p>由于项目版本上线频频出现一些问题，这里总结一下<br><a id="more"></a></p>
-<h5 id="1、数据问题"><a href="#1、数据问题" class="headerlink" title="1、数据问题"></a>1、数据问题</h5><ul>
-<li>模拟数据不一致，压测数据，压测数据生成的数据格式必须和版本一致，否则很容易引发一系列数据不一致问题。数据不一致的产生应该尽量避免，数据入库前应该做好校验，压测用的模拟数据生成做好校验。</li>
-<li>开发生产环境配置，开发生产使用的是不同的环境，5套左右环境，每套的配置都不一样，配置起来也非常累人，数据库的某些字段也要手工配置加密后的字段，稍有不慎就会导致设备连接链路有问题。</li>
-<li>设备上传数据不一致，设备的固件，APP版本要保持一致，多数是版本协议不一致的问题</li>
-</ul>
-<h5 id="2、代码问题"><a href="#2、代码问题" class="headerlink" title="2、代码问题"></a>2、代码问题</h5><ul>
-<li>字符串常量都用contants类封装，否则在后期维护上会付出大量成本。</li>
-<li>魔法数字也一样需要进行封装，Enum进行封装。</li>
-<li>依赖问题，尽量依赖稳定的jar包，jar包冲突要尽早排除</li>
-<li>出现线上问题需要紧急修复，修改war包或者jar包里配置文件等，不要使用文本工具编辑，可能由于格式问题造成运行失败</li>
-<li>变成要依赖接口，而不是具体实现。（无论线上紧急更换实现，还是线下变更，都是十分有好处的）</li>
-</ul>
-<h5 id="3、慢查询"><a href="#3、慢查询" class="headerlink" title="3、慢查询"></a>3、慢查询</h5><ul>
-<li>使用索引加快查询（rcms中未使用）</li>
-<li>使用redis，注意设置超时，淘汰策略等（rcms未使用）</li>
-<li>优化sql语句，减少查询字段</li>
-</ul>
-<h5 id="4、并发"><a href="#4、并发" class="headerlink" title="4、并发"></a>4、并发</h5><ul>
-<li>项目初期要考虑并发量和人力成本，简单的架构做起来快，扩展差，后续成本高。复杂架构反之。</li>
-<li>使用中间件削峰，mq或者redis进行数据缓冲。</li>
-</ul>
-
-      
-    </div>
-    
-    
-    
-
-    
-      <div>
-        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
-    <img id="wechat_subscriber_qcode" src="/uploads/wechat-qcode.jpg" alt="smith-dog wechat" style="width: 200px; max-width: 100%;"/>
-    <div>Welcome to sweep the above WeChat public address and subscribe to my blog!</div>
-</div>
-
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2018-11-01T17:06:25+08:00"
+              content="2018-11-01" >
+          11-01
+        </time>
       </div>
-    
 
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2018/09/29/java8-action/" rel="next" title="java8-Optional">
-                <i class="fa fa-chevron-left"></i> java8-Optional
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/10/10/日志框架变更记录log4j-logback/" rel="prev" title="日志框架变更记录log4j--->logback">
-                日志框架变更记录log4j--->logback <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </div>
-  
-  
-  
+    </header>
   </article>
 
 
 
-    <div class="post-spread">
       
-        <!-- JiaThis Button BEGIN -->
-<div class="jiathis_style">
-<span class="jiathis_txt">分享到：</span>
-<a class="jiathis_button_fav">收藏夹</a>
-<a class="jiathis_button_copy">复制网址</a>
-<a class="jiathis_button_email">邮件</a>
-<a class="jiathis_button_weixin">微信</a>
-<a class="jiathis_button_qzone">QQ空间</a>
-<a class="jiathis_button_tqq">腾讯微博</a>
-<a class="jiathis_button_douban">豆瓣</a>
-<a class="jiathis_button_share">一键分享</a>
 
-<a href="http://www.jiathis.com/share?uid=2140465" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
-<a class="jiathis_counter_style"></a>
-</div>
-<script type="text/javascript" >
-var jiathis_config={
-  data_track_clickback:true,
-  summary:"",
-  shortUrl:false,
-  hideMore:false
-}
-</script>
-<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=" charset="utf-8"></script>
-<!-- JiaThis Button END -->
-      
     </div>
   </div>
+  
+  
+  
+
+  
+
 
 
           </div>
@@ -479,10 +341,6 @@ var jiathis_config={
 
 
           
-
-  
-
-
 
         </div>
         
@@ -504,17 +362,8 @@ var jiathis_config={
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -587,22 +436,6 @@ var jiathis_config={
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#线上问题总结"><span class="nav-number">1.</span> <span class="nav-text">线上问题总结</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1、数据问题"><span class="nav-number">1.1.</span> <span class="nav-text">1、数据问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2、代码问题"><span class="nav-number">1.2.</span> <span class="nav-text">2、代码问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3、慢查询"><span class="nav-number">1.3.</span> <span class="nav-text">3、慢查询</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4、并发"><span class="nav-number">1.4.</span> <span class="nav-text">4、并发</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -750,10 +583,6 @@ var jiathis_config={
 
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
 
   
 

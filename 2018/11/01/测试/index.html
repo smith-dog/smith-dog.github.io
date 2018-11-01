@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="线上问题总结由于项目版本上线频频出现一些问题，这里总结一下">
+<meta name="description" content="物联网设备接入请求 设备的接入校验可以是与烧录的编号有关，或者与包装的编号，再或者是由管理员账号统一进行接入。1、接入考虑主要是限制接口的多次访问2、防止broker地址泄露">
 <meta property="og:type" content="article">
-<meta property="og:title" content="线上压测问题总结">
-<meta property="og:url" content="http://yoursite.com/2018/10/08/线上压测问题总结/index.html">
+<meta property="og:title" content="物联网设备接入请求">
+<meta property="og:url" content="http://yoursite.com/2018/11/01/测试/index.html">
 <meta property="og:site_name" content="smith-dog">
-<meta property="og:description" content="线上问题总结由于项目版本上线频频出现一些问题，这里总结一下">
+<meta property="og:description" content="物联网设备接入请求 设备的接入校验可以是与烧录的编号有关，或者与包装的编号，再或者是由管理员账号统一进行接入。1、接入考虑主要是限制接口的多次访问2、防止broker地址泄露">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-10-30T16:49:56.560Z">
+<meta property="og:updated_time" content="2018-11-01T09:46:09.543Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="线上压测问题总结">
-<meta name="twitter:description" content="线上问题总结由于项目版本上线频频出现一些问题，这里总结一下">
+<meta name="twitter:title" content="物联网设备接入请求">
+<meta name="twitter:description" content="物联网设备接入请求 设备的接入校验可以是与烧录的编号有关，或者与包装的编号，再或者是由管理员账号统一进行接入。1、接入考虑主要是限制接口的多次访问2、防止broker地址泄露">
 
 
 
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/10/08/线上压测问题总结/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/11/01/测试/"/>
 
 
 
 
 
-  <title>线上压测问题总结 | smith-dog</title>
+  <title>物联网设备接入请求 | smith-dog</title>
   
 
 
@@ -281,7 +281,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/08/线上压测问题总结/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/01/测试/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="smith-dog">
@@ -298,7 +298,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">线上压测问题总结</h1>
+          <h1 class="post-title" itemprop="name headline">物联网设备接入请求</h1>
         
 
         <div class="post-meta">
@@ -310,8 +310,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-08T14:57:21+08:00">
-                2018-10-08
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-01T17:06:25+08:00">
+                2018-11-01
               </time>
             
 
@@ -328,7 +328,7 @@
 
           
           
-             <span id="/2018/10/08/线上压测问题总结/" class="leancloud_visitors" data-flag-title="线上压测问题总结">
+             <span id="/2018/11/01/测试/" class="leancloud_visitors" data-flag-title="物联网设备接入请求">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -359,29 +359,11 @@
       
 
       
-        <h4 id="线上问题总结"><a href="#线上问题总结" class="headerlink" title="线上问题总结"></a>线上问题总结</h4><p>由于项目版本上线频频出现一些问题，这里总结一下<br><a id="more"></a></p>
-<h5 id="1、数据问题"><a href="#1、数据问题" class="headerlink" title="1、数据问题"></a>1、数据问题</h5><ul>
-<li>模拟数据不一致，压测数据，压测数据生成的数据格式必须和版本一致，否则很容易引发一系列数据不一致问题。数据不一致的产生应该尽量避免，数据入库前应该做好校验，压测用的模拟数据生成做好校验。</li>
-<li>开发生产环境配置，开发生产使用的是不同的环境，5套左右环境，每套的配置都不一样，配置起来也非常累人，数据库的某些字段也要手工配置加密后的字段，稍有不慎就会导致设备连接链路有问题。</li>
-<li>设备上传数据不一致，设备的固件，APP版本要保持一致，多数是版本协议不一致的问题</li>
-</ul>
-<h5 id="2、代码问题"><a href="#2、代码问题" class="headerlink" title="2、代码问题"></a>2、代码问题</h5><ul>
-<li>字符串常量都用contants类封装，否则在后期维护上会付出大量成本。</li>
-<li>魔法数字也一样需要进行封装，Enum进行封装。</li>
-<li>依赖问题，尽量依赖稳定的jar包，jar包冲突要尽早排除</li>
-<li>出现线上问题需要紧急修复，修改war包或者jar包里配置文件等，不要使用文本工具编辑，可能由于格式问题造成运行失败</li>
-<li>变成要依赖接口，而不是具体实现。（无论线上紧急更换实现，还是线下变更，都是十分有好处的）</li>
-</ul>
-<h5 id="3、慢查询"><a href="#3、慢查询" class="headerlink" title="3、慢查询"></a>3、慢查询</h5><ul>
-<li>使用索引加快查询（rcms中未使用）</li>
-<li>使用redis，注意设置超时，淘汰策略等（rcms未使用）</li>
-<li>优化sql语句，减少查询字段</li>
-</ul>
-<h5 id="4、并发"><a href="#4、并发" class="headerlink" title="4、并发"></a>4、并发</h5><ul>
-<li>项目初期要考虑并发量和人力成本，简单的架构做起来快，扩展差，后续成本高。复杂架构反之。</li>
-<li>使用中间件削峰，mq或者redis进行数据缓冲。</li>
-</ul>
-
+        <h4 id="物联网设备接入请求"><a href="#物联网设备接入请求" class="headerlink" title="物联网设备接入请求"></a>物联网设备接入请求</h4><blockquote>
+<p>设备的接入校验可以是与烧录的编号有关，或者与包装的编号，再或者是由管理员账号统一进行接入。<br>1、接入考虑主要是限制接口的多次访问<br>2、防止broker地址泄露</p>
+</blockquote>
+<a id="more"></a>
+<iframe id="embed_dom" name="embed_dom" frameborder="0" style="display:block;width:1024px; height:768px;" src="https://www.processon.com/embed/5bdaa8f7e4b0878bf41e3c05"></iframe>
       
     </div>
     
@@ -413,8 +395,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/09/29/java8-action/" rel="next" title="java8-Optional">
-                <i class="fa fa-chevron-left"></i> java8-Optional
+              <a href="/2018/10/18/从linux部署迁移到docker部署/" rel="next" title="从linux部署迁移到docker部署">
+                <i class="fa fa-chevron-left"></i> 从linux部署迁移到docker部署
               </a>
             
           </div>
@@ -422,10 +404,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/10/10/日志框架变更记录log4j-logback/" rel="prev" title="日志框架变更记录log4j--->logback">
-                日志框架变更记录log4j--->logback <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -597,7 +575,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#线上问题总结"><span class="nav-number">1.</span> <span class="nav-text">线上问题总结</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1、数据问题"><span class="nav-number">1.1.</span> <span class="nav-text">1、数据问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2、代码问题"><span class="nav-number">1.2.</span> <span class="nav-text">2、代码问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3、慢查询"><span class="nav-number">1.3.</span> <span class="nav-text">3、慢查询</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4、并发"><span class="nav-number">1.4.</span> <span class="nav-text">4、并发</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#物联网设备接入请求"><span class="nav-number">1.</span> <span class="nav-text">物联网设备接入请求</span></a></li></ol></div>
             
 
           </div>

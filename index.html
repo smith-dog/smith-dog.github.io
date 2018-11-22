@@ -281,6 +281,143 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/12/写代码碰到的问题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="smith-dog">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="smith-dog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/12/写代码碰到的问题/" itemprop="url">写代码碰到的问题</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-12T16:54:24+08:00">
+                2018-11-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/11/12/写代码碰到的问题/" class="leancloud_visitors" data-flag-title="写代码碰到的问题">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="mybatis中碰到的问题-采坑记录"><a href="#mybatis中碰到的问题-采坑记录" class="headerlink" title="mybatis中碰到的问题(采坑记录)"></a>mybatis中碰到的问题(采坑记录)</h4><h5 id="resultMap时间类型定义错误导致精度下降"><a href="#resultMap时间类型定义错误导致精度下降" class="headerlink" title="resultMap时间类型定义错误导致精度下降"></a>resultMap时间类型定义错误导致精度下降</h5><p>数据库的时间类型是DATETIME，mybatis写成DATE<br>在计算时间差的时候发现只能精确到秒，排查代码很久发现精度损失原来是这个原因<br>mybatis并没有抛错，这种行为似乎是被允许的。<br>开发</p>
+<h4 id="分页查询优化"><a href="#分页查询优化" class="headerlink" title="分页查询优化"></a>分页查询优化</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">SQL 1:</span><br><span class="line"> select </span><br><span class="line">  	a.id, </span><br><span class="line">  	a.receivedAt, </span><br><span class="line">  	a.deviceReportedTime, </span><br><span class="line">  	a.facility, </span><br><span class="line">  	a.priority, </span><br><span class="line">  	a.fromHost, </span><br><span class="line">  	a.message</span><br><span class="line">  	from systemevents a</span><br><span class="line"></span><br><span class="line">		where</span><br><span class="line">		 a.sysLogTag = &apos;20202020202020:&apos;</span><br><span class="line">		and a.id &gt; &apos;0&apos;</span><br><span class="line">		LIMIT 0,30</span><br><span class="line">SQL 2:</span><br><span class="line"> select </span><br><span class="line">  	a.id, </span><br><span class="line">  	a.receivedAt, </span><br><span class="line">  	a.deviceReportedTime, </span><br><span class="line">  	a.facility, </span><br><span class="line">  	a.priority, </span><br><span class="line">  	a.fromHost, </span><br><span class="line">  	a.message</span><br><span class="line">  	from systemevents a,</span><br><span class="line">  	(</span><br><span class="line">  		select id from systemevents b</span><br><span class="line">				where</span><br><span class="line">				 b.sysLogTag = &apos;20202020202020:&apos;</span><br><span class="line">				and b.id &gt; &apos;0&apos;</span><br><span class="line">				LIMIT 0,30</span><br><span class="line">  	) c</span><br><span class="line">  	where a.id=c.id</span><br></pre></td></tr></table></figure>
+<p>实践了阿里巴巴开发手册的内容，在30w数据量下SQL 2比SQL 1快了一半。</p>
+<h4 id="docker启动顺序问题"><a href="#docker启动顺序问题" class="headerlink" title="docker启动顺序问题"></a>docker启动顺序问题</h4><p>之前docker中容器的映射关系是用link来链接到别的容器的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--link mysql5.7(容器名):mysqlServer（别名）</span><br></pre></td></tr></table></figure>
+<p>后面在一次断电重启中发现，redis服务无法被别的容器识别到，但是使用docker ps是可以查看，redis-cli可以连接到redis。排查了很多方面的问题后，考虑到会不会是断电后，启动顺序无法保证，redis作为基础服务结果却在最后才启动。实验后果不其然，网上也给出一样提醒。</p>
+<p>解决方案是换用 addhost，这样重启就映射与ip相关，与容器无关<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--add-host redisServer:xxx.xxx.xxx.xxx(ip) \</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/01/测试/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1374,7 +1511,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>

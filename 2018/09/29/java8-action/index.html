@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="smith-dog">
 <meta property="og:description" content="http://www.runoob.com/java/java8-new-features.html   Java8 action">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-10-30T16:49:56.499Z">
+<meta property="og:updated_time" content="2018-12-07T05:06:37.226Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java8-Optional">
 <meta name="twitter:description" content="http://www.runoob.com/java/java8-new-features.html   Java8 action">
@@ -400,6 +400,17 @@
 <p>Java8 action</p>
 </blockquote>
 <a id="more"></a>
+<blockquote>
+<p>单纯做一些使用lambda的记录</p>
+</blockquote>
+<h5 id="lambda"><a href="#lambda" class="headerlink" title="lambda"></a>lambda</h5><h6 id="list-转-map"><a href="#list-转-map" class="headerlink" title="list 转 map"></a>list 转 map</h6><p>List<account> accounts<br>accounts.stream().collect(Collectors.toMap(Account::getId, Account::getUsername));<br>Map&lt;Long, String&gt;</account></p>
+<p>accounts.stream().collect(Collectors.toMap(Account::getId, account -&gt; account));<br>Map&lt;Long, Account&gt;</p>
+<p>重复key的情况<br>代码如下：</p>
+<p>public Map&lt;String, Account&gt; getNameAccountMap(List<account> accounts) {<br>    return accounts.stream().collect(Collectors.toMap(Account::getUsername, Function.identity()));<br>}<br>这个方法可能报错（java.lang.IllegalStateException: Duplicate key），因为name是有可能重复的。toMap有个重载方法，可以传入一个合并的函数来解决key冲突问题：</account></p>
+<p>public Map&lt;String, Account&gt; getNameAccountMap(List<account> accounts) {<br>    return accounts.stream().collect(Collectors.toMap(Account::getUsername, Function.identity(), (key1, key2) -&gt; key2));<br>}<br>这里只是简单的使用后者覆盖前者来解决key重复问题。</account></p>
+<p>指定具体收集的map<br>toMap还有另一个重载方法，可以指定一个Map的具体实现，来收集数据：</p>
+<p>public Map&lt;String, Account&gt; getNameAccountMap(List<account> accounts) {<br>    return accounts.stream().collect(Collectors.toMap(Account::getUsername, Function.identity(), (key1, key2) -&gt; key2, LinkedHashMap::new));<br>}</account></p>
+
       
     </div>
     
@@ -530,8 +541,17 @@ var jiathis_config={
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -549,7 +569,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -604,6 +624,22 @@ var jiathis_config={
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#lambda"><span class="nav-number">1.</span> <span class="nav-text">lambda</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#list-转-map"><span class="nav-number">1.1.</span> <span class="nav-text">list 转 map</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       

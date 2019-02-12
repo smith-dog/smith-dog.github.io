@@ -300,7 +300,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2019/01/21/sql/" itemprop="url">MySQL一些操作</a></h1>
+                <a class="post-title-link" href="/2019/01/21/sql/" itemprop="url">MySQL</a></h1>
         
 
         <div class="post-meta">
@@ -330,7 +330,7 @@
 
           
           
-             <span id="/2019/01/21/sql/" class="leancloud_visitors" data-flag-title="MySQL一些操作">
+             <span id="/2019/01/21/sql/" class="leancloud_visitors" data-flag-title="MySQL">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -362,16 +362,15 @@
 
       
         
-          
-            <blockquote>
-<p>由于线上某个日志表的数据量实在是很大，虽然有开启和关闭日志的功能，但是设备上报的日志量仍然很大。<br>迁移到mongodb或者定时对日志表的数据进行整理和清理</p>
-</blockquote>
-<h4 id="日志表清理24小时前的数据"><a href="#日志表清理24小时前的数据" class="headerlink" title="日志表清理24小时前的数据"></a>日志表清理24小时前的数据</h4><h5 id="查看是否启用定时任务功能"><a href="#查看是否启用定时任务功能" class="headerlink" title="查看是否启用定时任务功能"></a>查看是否启用定时任务功能</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">show variables like &apos;event_scheduler&apos;;</span><br></pre></td></tr></table></figure>
-<h5 id="启用定时任务"><a href="#启用定时任务" class="headerlink" title="启用定时任务"></a>启用定时任务</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set global event_scheduler =1;</span><br></pre></td></tr></table></figure>
-<h5 id="创建存储过程"><a href="#创建存储过程" class="headerlink" title="创建存储过程"></a>创建存储过程</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CREATE DEFINER=`root`@`%` PROCEDURE `test`()</span><br><span class="line">BEGIN</span><br><span class="line">delete from system_log where TIMESTAMPDIFF(HOUR, create_time, NOW()) &gt; 24; </span><br><span class="line">END</span><br></pre></td></tr></table></figure>
-<h5 id="创建定时任务"><a href="#创建定时任务" class="headerlink" title="创建定时任务"></a>创建定时任务</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">create event test_event</span><br><span class="line">on schedule every 24 hour STARTS &apos;2018-01-01 01:00:00&apos;</span><br><span class="line">on completion preserve disable</span><br><span class="line">do call test();</span><br></pre></td></tr></table></figure>
-<h5 id="开启定时任务"><a href="#开启定时任务" class="headerlink" title="开启定时任务"></a>开启定时任务</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SELECT event_name,event_definition,interval_value,interval_field,status FROM information_schema.EVENTS;</span><br><span class="line">alter event test_event on completion preserve enable;</span><br></pre></td></tr></table></figure>
-          
+          <h4 id="日志表清理24小时前的数据"><a href="#日志表清理24小时前的数据" class="headerlink" title="日志表清理24小时前的数据"></a>日志表清理24小时前的数据</h4><blockquote>
+<p>由于线上某个日志表的数据量实在是很大，虽然有开启和关闭日志的功能，但是设备上报的日志量仍然很大。<br>迁移到mongodb或者定时对日志表的数据进行整理和清理<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/01/21/sql/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -499,111 +498,17 @@
 
       
         
-          
-            <p>[TOC]</p>
+          <p>[TOC]</p>
 <h4 id="RabbitMQ"><a href="#RabbitMQ" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h4><blockquote>
 <p>与SpringAMQP完美结合、API丰富<br>集群模式丰富，表达式配置，HA模式，镜像队列模型<br>保证数据不丢失的前提做到高可靠性、可用性</p>
 </blockquote>
-<h4 id="高性能的原因"><a href="#高性能的原因" class="headerlink" title="高性能的原因"></a>高性能的原因</h4><blockquote>
-<p>erlang语言，最初用于交换机领域的架构模式，使得rabbitMQ在Broker之间进行数据交互性能是非常优秀的<br>erlang的优点：erlang有着和原生Socket一样的延迟</p>
-</blockquote>
-<h4 id="AMQP高级消息队列协议"><a href="#AMQP高级消息队列协议" class="headerlink" title="AMQP高级消息队列协议"></a>AMQP高级消息队列协议</h4><blockquote>
-<p>AMQP全称:Advanced Message Queuing Protocol<br>AMQP翻译:高级消息队列协议</p>
-</blockquote>
-<p><img src="/images/pasted-4.png" alt="upload successful"></p>
-<h4 id="核心概念"><a href="#核心概念" class="headerlink" title="核心概念"></a>核心概念</h4><ul>
-<li>Server:又称为Broker，接受客户端的连接，实现AMQP实体服务。</li>
-<li>Connection:连接,应用程序与Broker的网络连接</li>
-<li>Channel:网络信道，几乎所有的操作都在Channel中进行，Channel是进行消息读写的通道。客户端可建立多个Channel，每个Channel代表一个会话任务。</li>
-<li>Message:消息，服务器和应用程序之间传送的数据，由Properties和Body组成。Properties可以对消息进行修饰，比如消息的优先级、延迟等高级特性；Body则就是消息体内容。</li>
-<li>Virtual host:虚拟地址，用于逻辑分离，最上层的消息路由。一个Virtual Host里面可以有若干个Exchange和Queue，同一个Virtual Host里面不能有相同名称的Exchange或Queue。</li>
-<li>Binding:Exchange和Queue之间的虚拟连接，binding中可以包含routing key</li>
-<li>Routing key:一个路由规则，虚拟机可用它来确定如何路由一个特定消息</li>
-<li>Queue:也称为Message Queue,消息队列，保存消息并将它们转发给消费者。</li>
-</ul>
-<h5 id="Channel注意要点"><a href="#Channel注意要点" class="headerlink" title="Channel注意要点"></a>Channel注意要点</h5><p>Connection 可以用来创建多个Channel实例但是 Channel 实例不能在线程问共享， 应用程序应该为每一个线程开辟一个 Channel。某些情况下 Channel 的操作可以并发运行，但 是在其他情况下会导致在网络上出现错误的通信帧交错，同时也会影响友送方确认( publisher confrrm)机制的运行，所以多线程问共享 Channel 实例是非线程安全的。<br>Channel 或者 Connection 中有个 isOpen 方法可以用来检测其是否己处于开启状态。但并不推荐在生产环境的代码上使用 工sOpen 方法，这个方法的返回值依赖于shutdownCause可能会产生竞争.<br>通常情况下，在调用 createXXX 或者 newXXX 方法之后，我们可以简单地认为 Connection 或者 Channel 已经成功地处于开启状态，而并不会在代码中使用 isOpen 这个 检测方法。如果在使用 Channel 的时候其己经处于关闭状态，那么程序会抛出一个 com.rabbitmq . client.ShutdownSignalException，我们只需捕获这个异常即可。当 然同时也要试着捕获 IOExceptio口或者 SocketException，以防 Connection 意外关闭。</p>
-<h5 id="注意要点"><a href="#注意要点" class="headerlink" title="注意要点"></a>注意要点</h5><p>生产者和消费者都可以声明一个交换器或者队列。如果尝试声明一个已经存在的交换器或者队列，只要声明的参数完全匹配现存的交换器或者队列， RabbitMQ 就可 以什么都不做，并成功返回。 如果声明的参数不匹配则会抛出异常。</p>
-<h4 id="Rabbit的整体架构"><a href="#Rabbit的整体架构" class="headerlink" title="Rabbit的整体架构"></a>Rabbit的整体架构</h4><p><img src="/images/pasted-5.png" alt="upload successful"></p>
-<p>生产和消费是解耦的<br>由Exchange指定路由规则，路由到哪个Queue</p>
-<h4 id="RabbitMQ消息流转"><a href="#RabbitMQ消息流转" class="headerlink" title="RabbitMQ消息流转"></a>RabbitMQ消息流转</h4><p><img src="/images/pasted-6.png" alt="upload successful"></p>
-<h4 id="RabbitMQ安装与使用"><a href="#RabbitMQ安装与使用" class="headerlink" title="RabbitMQ安装与使用"></a>RabbitMQ安装与使用</h4><h5 id="Linux基础安装"><a href="#Linux基础安装" class="headerlink" title="Linux基础安装"></a>Linux基础安装</h5><h5 id="docker安装"><a href="#docker安装" class="headerlink" title="docker安装"></a>docker安装</h5><h4 id="命令行与管控台-基础操作"><a href="#命令行与管控台-基础操作" class="headerlink" title="命令行与管控台-基础操作"></a>命令行与管控台-基础操作</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">rabbitmqctl stop_app 关闭应用</span><br><span class="line"></span><br><span class="line">rabbitmqctl start_app 启动应用</span><br><span class="line"></span><br><span class="line">rabbitmqctl status 节点状态</span><br><span class="line"></span><br><span class="line">rabbitmqctl add_user username password 添加用户</span><br><span class="line"></span><br><span class="line">rabbitmqctl list_users 列出所有用户</span><br><span class="line"></span><br><span class="line">rabbitmqctl delete_user username 删除用户</span><br><span class="line"></span><br><span class="line">rabbitmqctl clear_permissions -p vhostpath username 清楚用户权限</span><br><span class="line"></span><br><span class="line">rabbitmqctl list_user_permission username 列出用户权限</span><br><span class="line"></span><br><span class="line">rabbitmqctl change_password username newpassword 修改密码</span><br><span class="line"></span><br><span class="line">rabbitmqctl set_permissions -p vhostpath username &quot;.*&quot; &quot;.*&quot; &quot;.*&quot;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">rabbitmqctl add_vhost vhostpath 创建虚拟主机</span><br><span class="line"></span><br><span class="line">rabbitmqctl list_vhost 列出所有虚拟主机</span><br><span class="line"></span><br><span class="line">rabbitmqctl list_permissions -p vhostpath 列出虚拟主机上所有权限</span><br><span class="line"></span><br><span class="line">rabbitmqctl delete_vhost vhostpath 删除虚拟主机</span><br><span class="line"></span><br><span class="line">rabbitmqctl list_queues 查看所有队列信息</span><br><span class="line"></span><br><span class="line">rabbitmqctl -p vhostpath purge_queue bule 清除队列里的消息</span><br></pre></td></tr></table></figure>
-<h4 id="命令行与管控台-高级操作"><a href="#命令行与管控台-高级操作" class="headerlink" title="命令行与管控台-高级操作"></a>命令行与管控台-高级操作</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">rabbitmqctl reset 移除所有数据，要在rabbitmqctl stop_app 之后使用</span><br><span class="line"></span><br><span class="line">rabbitmqctl join_cluster &lt;clusternode&gt; [--ram] 组成集群命令</span><br><span class="line"></span><br><span class="line">rabbitmqctl cluster_status 查看集群状态</span><br><span class="line"></span><br><span class="line">rabbitmqctl change_cluster_node_type disc |ram 修改集群状态</span><br><span class="line"></span><br><span class="line">rabbitmqctl forget_cluster_node[--offline] 忘记节点（摘除节点）</span><br><span class="line"></span><br><span class="line">rabbitmqctl rename_cluster_node oldnode1 newnode1 [oldnode2] [newnode2] ...    修改节点名称</span><br></pre></td></tr></table></figure>
-<h4 id="Exchange-交换机"><a href="#Exchange-交换机" class="headerlink" title="Exchange 交换机"></a>Exchange 交换机</h4><blockquote>
-<p>Exchange；接收消息，并根据路由键转发消息所绑定的队列</p>
-</blockquote>
-<p><img src="/images/pasted-7.png" alt="upload successful"></p>
-<h5 id="交换机属性"><a href="#交换机属性" class="headerlink" title="交换机属性"></a>交换机属性</h5><p>Name:交换机名称<br>Type:交换机类型 direct、topic、fanout、headers<br>Durability:是否需要持久化，true为持久化<br>Auto Delete: 当最后一个绑定到Exchange上的队列<br>Interal:当前Exchange是否用于RabbitMq内部使用，默认为false<br>Arguments:扩展参数，用于扩展AMQP协议自制制定化使用</p>
-<h6 id="Direct-Exchange"><a href="#Direct-Exchange" class="headerlink" title="Direct Exchange"></a>Direct Exchange</h6><p>所有发送到Direct Exchange的消息被转发到routeKey中指定的Queue<br>注意：Direct模式可以使用RabbitMQ自带的Exchange:default Exchange, 所以不需要将Exchange进行任何绑定（binding）操作，消息传递时，RouteKey必须完全匹配才会被队列接受，否则该消息会被抛弃。</p>
-<p><img src="/images/pasted-8.png" alt="upload successful"></p>
-<h4 id="Virtual-host-虚拟主机"><a href="#Virtual-host-虚拟主机" class="headerlink" title="Virtual host-虚拟主机"></a>Virtual host-虚拟主机</h4><p>虚拟地址，用于进行逻辑隔离，最上层的消息路由<br>一个Virtual Host 里面可以有若干个Exchange和Queue<br>同一个Virtual Host 里面不能有相同名称的Exchange或者Queue</p>
-<p><img src="/images/pasted-9.png" alt="upload successful"></p>
-<h4 id="高级特性"><a href="#高级特性" class="headerlink" title="高级特性"></a>高级特性</h4><ul>
-<li><p>消息如何保障100%的投递成功</p>
-</li>
-<li><p>幂等性</p>
-</li>
-<li><p>业务高峰期，避免重复消费的问题</p>
-</li>
-<li><p>confirm确认消息、return返回消息</p>
-</li>
-<li><p>自定义消费者</p>
-</li>
-<li><p>消息ACK与重回队列</p>
-</li>
-<li><p>消息的限流</p>
-</li>
-<li><p>TTL消息</p>
-</li>
-<li><p>死信队列</p>
-</li>
-</ul>
-<h5 id="消息如何保障100-的投递成功"><a href="#消息如何保障100-的投递成功" class="headerlink" title="消息如何保障100%的投递成功"></a>消息如何保障100%的投递成功</h5><ul>
-<li>保障消息的成功发出</li>
-<li>保障MQ节点成功接收</li>
-<li>发送端收到MQ节点（Broker）确认应答</li>
-<li>完善的消息进行补偿机制</li>
-</ul>
-<h5 id="生产端-可靠性投递（一）"><a href="#生产端-可靠性投递（一）" class="headerlink" title="生产端-可靠性投递（一）"></a>生产端-可靠性投递（一）</h5><ul>
-<li>消息落库，对消息状态进行打标<h5 id="生产端-可靠性投递（二）"><a href="#生产端-可靠性投递（二）" class="headerlink" title="生产端-可靠性投递（二）"></a>生产端-可靠性投递（二）</h5><img src="/images/pasted-10.png" alt="upload successful"></li>
-<li>消息的延迟投递，做二次确认，回调检查</li>
-<li><p>快速失败</p>
-<h5 id="生产端-可靠性投递（三）"><a href="#生产端-可靠性投递（三）" class="headerlink" title="生产端-可靠性投递（三）"></a>生产端-可靠性投递（三）</h5></li>
-<li><p>保障MQ我们思考如果第一种可靠性投递，在高并发的场景下是否合适？</p>
-</li>
-<li>问题：两次入库，数据库压力很大</li>
-<li>解决：消息的延迟投递，做二次确认，回调检查，补偿机制</li>
-</ul>
-<h5 id="生产端-可靠性投递（四）"><a href="#生产端-可靠性投递（四）" class="headerlink" title="生产端-可靠性投递（四）"></a>生产端-可靠性投递（四）</h5><p><img src="/images/pasted-11.png" alt="upload successful"></p>
-<h4 id="幂等性概念"><a href="#幂等性概念" class="headerlink" title="幂等性概念"></a>幂等性概念</h4><p>多次相同的操作，最终结果一样</p>
-<p>例子：乐观锁<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">update t_reps set count = count - 1,version = version +1</span><br><span class="line">where version = 1</span><br></pre></td></tr></table></figure></p>
-<h5 id="消费端-幂等性保障"><a href="#消费端-幂等性保障" class="headerlink" title="消费端-幂等性保障"></a>消费端-幂等性保障</h5><blockquote>
-<p>在海量订单产生的业务高峰期，如何避免消息的重复消费？</p>
-</blockquote>
-<ul>
-<li>消费端实现幂等性，就意味着，我们消息永远不会消费多次，即使我们收到了多条一样的消息</li>
-</ul>
-<h6 id="业界主流的幂等性操作："><a href="#业界主流的幂等性操作：" class="headerlink" title="业界主流的幂等性操作："></a>业界主流的幂等性操作：</h6><ul>
-<li>唯一ID+指纹码机制，利用数据库主键去重<br>selete count(1) from t_order where id = 唯一ID + 指纹码<br>好处：实现简单<br>坏处：高并发下有数据库写入的性能瓶颈<br>解决方案：根据ID进行分库分表进行算法路由</li>
-</ul>
-<ul>
-<li>利用Redis的原子性去实现<br>使用Redis进行幂等，需要考虑的问题<br>第一：我们是否要进行数据库落库，如果落库的话，关键解决的问题是数据库和缓存如何做到原子性？<br>我的回答：数据库入库失败做一个补偿机制，将redis缓存删除。   </li>
-</ul>
-<p>第二：如果不进行落库，那么都存储到缓存中，如何设置定时同步的策略？<br>我的回答：1、由专门的服务进行扫描刷盘<br>redis设置AOF的持久化、可以设置1秒内的刷盘</p>
-<h4 id="Confirm-确认消息"><a href="#Confirm-确认消息" class="headerlink" title="Confirm 确认消息"></a>Confirm 确认消息</h4><p>理解Confirm消息确认机制：</p>
-<ul>
-<li>消息的确认，是指生产者投递消息后，如果Broker收到消息，则会给我们生产者一个应答。</li>
-<li>生产者进行接受应答，用来确定这条消息是否正常地发送到Broker，这种方式也是消息可靠性投递的核心保障！</li>
-</ul>
-<p><img src="/images/pasted-12.png" alt="upload successful"></p>
-<h5 id="Confirm确认消息实现"><a href="#Confirm确认消息实现" class="headerlink" title="Confirm确认消息实现"></a>Confirm确认消息实现</h5><p>如何实现Confirm确认消息</p>
-<ul>
-<li>第一步：在channel上开启确认模式：channel.confirmSelect()</li>
-<li>第二步：在channel上添加监听：addConfirmListener,监听成功和失败的返回结果，根据具体的结果对消息进行重新发送、或记录日志等后续处理！</li>
-</ul>
-<!-- 未完待续 -->
-<h5 id="Return返回消息详解"><a href="#Return返回消息详解" class="headerlink" title="Return返回消息详解"></a>Return返回消息详解</h5><h5 id="自定义消费者"><a href="#自定义消费者" class="headerlink" title="自定义消费者"></a>自定义消费者</h5><h5 id="消费端的限流策略"><a href="#消费端的限流策略" class="headerlink" title="消费端的限流策略"></a>消费端的限流策略</h5><h5 id="消费端ACK与重回队列机制"><a href="#消费端ACK与重回队列机制" class="headerlink" title="消费端ACK与重回队列机制"></a>消费端ACK与重回队列机制</h5><h5 id="TTL消息详解"><a href="#TTL消息详解" class="headerlink" title="TTL消息详解"></a>TTL消息详解</h5><h5 id="死信队列详解"><a href="#死信队列详解" class="headerlink" title="死信队列详解"></a>死信队列详解</h5><h4 id="SpringAMQP整合RabbitMQ"><a href="#SpringAMQP整合RabbitMQ" class="headerlink" title="SpringAMQP整合RabbitMQ"></a>SpringAMQP整合RabbitMQ</h4><h5 id="SpringAMQP-RabbitAdmin应用"><a href="#SpringAMQP-RabbitAdmin应用" class="headerlink" title="SpringAMQP-RabbitAdmin应用"></a>SpringAMQP-RabbitAdmin应用</h5><h5 id="SpringAMQP-RabbitMQ声明式配置使用"><a href="#SpringAMQP-RabbitMQ声明式配置使用" class="headerlink" title="SpringAMQP-RabbitMQ声明式配置使用"></a>SpringAMQP-RabbitMQ声明式配置使用</h5><h5 id="SpringAMQP消息模板组件-RabbitTemplate实战"><a href="#SpringAMQP消息模板组件-RabbitTemplate实战" class="headerlink" title="SpringAMQP消息模板组件-RabbitTemplate实战"></a>SpringAMQP消息模板组件-RabbitTemplate实战</h5><h5 id="SpringAMQP消息容器-SimpleMessageListenerContainer详解"><a href="#SpringAMQP消息容器-SimpleMessageListenerContainer详解" class="headerlink" title="SpringAMQP消息容器-SimpleMessageListenerContainer详解"></a>SpringAMQP消息容器-SimpleMessageListenerContainer详解</h5><h5 id="SpringAMQP消息适配器-MessageListenerAdapter使用"><a href="#SpringAMQP消息适配器-MessageListenerAdapter使用" class="headerlink" title="SpringAMQP消息适配器-MessageListenerAdapter使用"></a>SpringAMQP消息适配器-MessageListenerAdapter使用</h5><h5 id="SpringAMQP消息转换器-MessageConverter讲解"><a href="#SpringAMQP消息转换器-MessageConverter讲解" class="headerlink" title="SpringAMQP消息转换器-MessageConverter讲解"></a>SpringAMQP消息转换器-MessageConverter讲解</h5><h5 id="RabbitMQ与SpringBoot2-0整合实战"><a href="#RabbitMQ与SpringBoot2-0整合实战" class="headerlink" title="RabbitMQ与SpringBoot2.0整合实战"></a>RabbitMQ与SpringBoot2.0整合实战</h5><h5 id="RabbitMQ与Spring-Cloud-Stream整合实战"><a href="#RabbitMQ与Spring-Cloud-Stream整合实战" class="headerlink" title="RabbitMQ与Spring Cloud Stream整合实战"></a>RabbitMQ与Spring Cloud Stream整合实战</h5><h4 id="RabbitMQ集群架构"><a href="#RabbitMQ集群架构" class="headerlink" title="RabbitMQ集群架构"></a>RabbitMQ集群架构</h4><h4 id="领略SET化架构衍化与设计"><a href="#领略SET化架构衍化与设计" class="headerlink" title="领略SET化架构衍化与设计"></a>领略SET化架构衍化与设计</h4><h4 id="拓展基础组件封装思路"><a href="#拓展基础组件封装思路" class="headerlink" title="拓展基础组件封装思路"></a>拓展基础组件封装思路</h4>
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/12/21/rabbitMQ精讲/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

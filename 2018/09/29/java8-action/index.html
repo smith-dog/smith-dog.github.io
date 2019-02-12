@@ -82,14 +82,14 @@
 <meta name="description" content="http://www.runoob.com/java/java8-new-features.html   Java8 action">
 <meta name="keywords" content="java,java8 in Action">
 <meta property="og:type" content="article">
-<meta property="og:title" content="java8-Optional">
+<meta property="og:title" content="lambda">
 <meta property="og:url" content="http://yoursite.com/2018/09/29/java8-action/index.html">
 <meta property="og:site_name" content="smith-dog">
 <meta property="og:description" content="http://www.runoob.com/java/java8-new-features.html   Java8 action">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-12-07T05:06:37.226Z">
+<meta property="og:updated_time" content="2019-02-12T07:15:16.317Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="java8-Optional">
+<meta name="twitter:title" content="lambda">
 <meta name="twitter:description" content="http://www.runoob.com/java/java8-new-features.html   Java8 action">
 
 
@@ -126,7 +126,7 @@
 
 
 
-  <title>java8-Optional | smith-dog</title>
+  <title>lambda | smith-dog</title>
   
 
 
@@ -299,7 +299,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">java8-Optional</h1>
+          <h1 class="post-title" itemprop="name headline">lambda</h1>
         
 
         <div class="post-meta">
@@ -362,7 +362,7 @@
 
           
           
-             <span id="/2018/09/29/java8-action/" class="leancloud_visitors" data-flag-title="java8-Optional">
+             <span id="/2018/09/29/java8-action/" class="leancloud_visitors" data-flag-title="lambda">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -410,6 +410,8 @@
 <p>public Map&lt;String, Account&gt; getNameAccountMap(List<account> accounts) {<br>    return accounts.stream().collect(Collectors.toMap(Account::getUsername, Function.identity(), (key1, key2) -&gt; key2));<br>}<br>这里只是简单的使用后者覆盖前者来解决key重复问题。</account></p>
 <p>指定具体收集的map<br>toMap还有另一个重载方法，可以指定一个Map的具体实现，来收集数据：</p>
 <p>public Map&lt;String, Account&gt; getNameAccountMap(List<account> accounts) {<br>    return accounts.stream().collect(Collectors.toMap(Account::getUsername, Function.identity(), (key1, key2) -&gt; key2, LinkedHashMap::new));<br>}</account></p>
+<h6 id="map-values转list"><a href="#map-values转list" class="headerlink" title="map-values转list"></a>map-values转list</h6><p>Map&lt;Long, Account&gt; accounts<br>List<account> </account></p>
+<p>简单的装换，以及定义排序规则<br>accounts.values().stream().sorted(Comparator.comparing(Account::getId)).collect(Collectors.toList());</p>
 
       
     </div>
@@ -450,8 +452,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/09/29/里巴巴Java开发手册--抄写/" rel="next" title="alibaba java document">
-                <i class="fa fa-chevron-left"></i> alibaba java document
+              <a href="/2018/09/29/redis-深度历险（一）/" rel="next" title="redis深度历险（一）">
+                <i class="fa fa-chevron-left"></i> redis深度历险（一）
               </a>
             
           </div>
@@ -460,8 +462,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/09/29/redis-深度历险（一）/" rel="prev" title="redis深度历险（一）">
-                redis深度历险（一） <i class="fa fa-chevron-right"></i>
+              <a href="/2018/10/08/线上压测问题总结/" rel="prev" title="线上压测问题总结">
+                线上压测问题总结 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -569,7 +571,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -634,7 +636,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#lambda"><span class="nav-number">1.</span> <span class="nav-text">lambda</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#list-转-map"><span class="nav-number">1.1.</span> <span class="nav-text">list 转 map</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#lambda"><span class="nav-number">1.</span> <span class="nav-text">lambda</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#list-转-map"><span class="nav-number">1.1.</span> <span class="nav-text">list 转 map</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#map-values转list"><span class="nav-number">1.2.</span> <span class="nav-text">map-values转list</span></a></li></ol></li></ol></div>
             
 
           </div>

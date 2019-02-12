@@ -79,19 +79,22 @@
 
 
 
-<meta name="description" content="设计模式（课程笔记）创建型设计模式1简单工厂（不属于23中GOF设计模式）1.1适用场景 工厂负责创建的对象比较少 客户端只知道传入工厂类的参数，对于如何创建对象逻辑不关心1.2优点 只需传入参数，无需关心创建细节1.3缺点 违背开闭原则，增加产品需要修改工厂类  2工厂方法2.1适用场景 创建对象需要大量重复代码 客户端不依赖于产品类实例如何被创建、实现等细节 一个类通过子类来指定创建哪个对象">
+<meta name="description" content="设计模式（课程笔记）创建型设计模式">
 <meta property="og:type" content="article">
 <meta property="og:title" content="设计模式">
 <meta property="og:url" content="http://yoursite.com/2018/12/07/设计模式/index.html">
 <meta property="og:site_name" content="smith-dog">
-<meta property="og:description" content="设计模式（课程笔记）创建型设计模式1简单工厂（不属于23中GOF设计模式）1.1适用场景 工厂负责创建的对象比较少 客户端只知道传入工厂类的参数，对于如何创建对象逻辑不关心1.2优点 只需传入参数，无需关心创建细节1.3缺点 违背开闭原则，增加产品需要修改工厂类  2工厂方法2.1适用场景 创建对象需要大量重复代码 客户端不依赖于产品类实例如何被创建、实现等细节 一个类通过子类来指定创建哪个对象">
+<meta property="og:description" content="设计模式（课程笔记）创建型设计模式">
 <meta property="og:locale" content="en">
+<meta property="og:image" content="http://yoursite.com/images/pasted-3.png">
 <meta property="og:image" content="http://yoursite.com/images/pasted-0.png">
-<meta property="og:updated_time" content="2018-12-07T12:52:26.471Z">
+<meta property="og:image" content="http://yoursite.com/images/pasted-1.png">
+<meta property="og:image" content="http://yoursite.com/images/pasted-2.png">
+<meta property="og:updated_time" content="2019-02-12T06:49:31.823Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="设计模式">
-<meta name="twitter:description" content="设计模式（课程笔记）创建型设计模式1简单工厂（不属于23中GOF设计模式）1.1适用场景 工厂负责创建的对象比较少 客户端只知道传入工厂类的参数，对于如何创建对象逻辑不关心1.2优点 只需传入参数，无需关心创建细节1.3缺点 违背开闭原则，增加产品需要修改工厂类  2工厂方法2.1适用场景 创建对象需要大量重复代码 客户端不依赖于产品类实例如何被创建、实现等细节 一个类通过子类来指定创建哪个对象">
-<meta name="twitter:image" content="http://yoursite.com/images/pasted-0.png">
+<meta name="twitter:description" content="设计模式（课程笔记）创建型设计模式">
+<meta name="twitter:image" content="http://yoursite.com/images/pasted-3.png">
 
 
 
@@ -361,7 +364,8 @@
       
 
       
-        <h4 id="设计模式（课程笔记）"><a href="#设计模式（课程笔记）" class="headerlink" title="设计模式（课程笔记）"></a>设计模式（课程笔记）</h4><h4 id="创建型设计模式"><a href="#创建型设计模式" class="headerlink" title="创建型设计模式"></a>创建型设计模式</h4><h5 id="1简单工厂（不属于23中GOF设计模式）"><a href="#1简单工厂（不属于23中GOF设计模式）" class="headerlink" title="1简单工厂（不属于23中GOF设计模式）"></a>1简单工厂（不属于23中GOF设计模式）</h5><h6 id="1-1适用场景"><a href="#1-1适用场景" class="headerlink" title="1.1适用场景"></a>1.1适用场景</h6><ul>
+        <h4 id="设计模式（课程笔记）"><a href="#设计模式（课程笔记）" class="headerlink" title="设计模式（课程笔记）"></a>设计模式（课程笔记）</h4><h4 id="创建型设计模式"><a href="#创建型设计模式" class="headerlink" title="创建型设计模式"></a>创建型设计模式</h4><a id="more"></a>
+<h5 id="1简单工厂（不属于23中GOF设计模式）"><a href="#1简单工厂（不属于23中GOF设计模式）" class="headerlink" title="1简单工厂（不属于23中GOF设计模式）"></a>1简单工厂（不属于23中GOF设计模式）</h5><h6 id="1-1适用场景"><a href="#1-1适用场景" class="headerlink" title="1.1适用场景"></a>1.1适用场景</h6><ul>
 <li>工厂负责创建的对象比较少</li>
 <li>客户端只知道传入工厂类的参数，对于如何创建对象逻辑不关心<h6 id="1-2优点"><a href="#1-2优点" class="headerlink" title="1.2优点"></a>1.2优点</h6></li>
 <li>只需传入参数，无需关心创建细节<h6 id="1-3缺点"><a href="#1-3缺点" class="headerlink" title="1.3缺点"></a>1.3缺点</h6></li>
@@ -380,6 +384,7 @@
 <li>类的个数过多，增加复杂度</li>
 <li>增加系统抽象性和理解难度</li>
 </ul>
+<p><img src="/images/pasted-3.png" alt="upload successful"></p>
 <h6 id="2-4源码中的体现"><a href="#2-4源码中的体现" class="headerlink" title="2.4源码中的体现"></a>2.4源码中的体现</h6><p>logback中的 LogFactory.getLogger();</p>
 <h5 id="3抽象工厂"><a href="#3抽象工厂" class="headerlink" title="3抽象工厂"></a>3抽象工厂</h5><h6 id="3-1定义及适用场景"><a href="#3-1定义及适用场景" class="headerlink" title="3.1定义及适用场景"></a>3.1定义及适用场景</h6><ul>
 <li>提供创建一系列相关或互相依赖对象的接口</li>
@@ -394,6 +399,58 @@
 <li>增加系统的抽象性和理解难度</li>
 </ul>
 <p><img src="/images/pasted-0.png" alt="upload successful"></p>
+<p><img src="/images/pasted-1.png" alt="upload successful"></p>
+<p><img src="/images/pasted-2.png" alt="upload successful"></p>
+<h4 id="建造者模式"><a href="#建造者模式" class="headerlink" title="建造者模式"></a>建造者模式</h4><h6 id="定义及适用范围"><a href="#定义及适用范围" class="headerlink" title="定义及适用范围"></a>定义及适用范围</h6><ul>
+<li><p>将一个复杂对象的构建于它的表示分离，使得同样的构建过程可以创建不同的表示。</p>
+</li>
+<li><p>用户只需指定需要建造的类型就可以得到它们，建造过程及细节不需要知道。</p>
+</li>
+<li><p>关注建造时的组件和建造顺序</p>
+</li>
+<li><p>类型：创建型</p>
+</li>
+<li><p>如果一个对象有非常复杂的内部结构（很多属性）</p>
+</li>
+<li><p>想把复杂对象的创建和使用分离</p>
+</li>
+</ul>
+<h6 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h6><ul>
+<li>封装性好，创建和使用分离</li>
+<li>扩展性好、建造类之间独立、一定程度上解耦</li>
+</ul>
+<h6 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h6><ul>
+<li>产生多余的build对象</li>
+<li>产品内部发生变化，建造者都要修改，成本较大</li>
+</ul>
+<h4 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h4><h5 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h5><ul>
+<li><p>保证一个类仅有一个实例，并提供一个全局访问点</p>
+</li>
+<li><p>类型：创建型</p>
+</li>
+</ul>
+<h5 id="适用范围"><a href="#适用范围" class="headerlink" title="适用范围"></a>适用范围</h5><ul>
+<li>确保任何情况下都绝对只有一个实例</li>
+</ul>
+<h5 id="单例模式—-懒汉式"><a href="#单例模式—-懒汉式" class="headerlink" title="单例模式—-懒汉式"></a>单例模式—-懒汉式</h5><h6 id="单线程下的懒汉式"><a href="#单线程下的懒汉式" class="headerlink" title="单线程下的懒汉式"></a>单线程下的懒汉式</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h6 id="多线程下的懒汉式"><a href="#多线程下的懒汉式" class="headerlink" title="多线程下的懒汉式"></a>多线程下的懒汉式</h6><p>同步锁<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">```</span><br><span class="line">双重检查</span><br></pre></td></tr></table></figure></p>
+<p><code>`</code></p>
+<h6 id="懒汉式优缺点"><a href="#懒汉式优缺点" class="headerlink" title="懒汉式优缺点"></a>懒汉式优缺点</h6><p>可以延迟加载，降低内存使用</p>
+<h6 id="单线程下的饿汉式"><a href="#单线程下的饿汉式" class="headerlink" title="单线程下的饿汉式"></a>单线程下的饿汉式</h6><h6 id="多线程下的饿汉式"><a href="#多线程下的饿汉式" class="headerlink" title="多线程下的饿汉式"></a>多线程下的饿汉式</h6><p>内部静态类</p>
+<h6 id="序列化破坏单例模式"><a href="#序列化破坏单例模式" class="headerlink" title="序列化破坏单例模式"></a>序列化破坏单例模式</h6><ul>
+<li><p>1、serializable</p>
+</li>
+<li><p>2、readResolve方法保证不是实例化</p>
+</li>
+</ul>
+<h6 id="防止反射攻击"><a href="#防止反射攻击" class="headerlink" title="防止反射攻击"></a>防止反射攻击</h6><p>1、饿汉式可以在private中进行判断<br>2、懒汉式似乎无法避免</p>
+<h6 id="枚举单例"><a href="#枚举单例" class="headerlink" title="枚举单例"></a>枚举单例</h6><ul>
+<li>天然地可以防止序列化和反射攻击</li>
+</ul>
+<h6 id="容器单例"><a href="#容器单例" class="headerlink" title="容器单例"></a>容器单例</h6><ul>
+<li>使用容器对单例进行管理，一般使用map</li>
+<li>不是线程安全的，但是初始化后只有一个实例，因为map的</li>
+</ul>
 
       
     </div>
@@ -435,6 +492,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/21/rabbitMQ精讲/" rel="prev" title="rabbitMQ精讲笔记">
+                rabbitMQ精讲笔记 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -541,7 +602,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -606,7 +667,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#设计模式（课程笔记）"><span class="nav-number">1.</span> <span class="nav-text">设计模式（课程笔记）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建型设计模式"><span class="nav-number">2.</span> <span class="nav-text">创建型设计模式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1简单工厂（不属于23中GOF设计模式）"><span class="nav-number">2.1.</span> <span class="nav-text">1简单工厂（不属于23中GOF设计模式）</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#1-1适用场景"><span class="nav-number">2.1.1.</span> <span class="nav-text">1.1适用场景</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#1-2优点"><span class="nav-number">2.1.2.</span> <span class="nav-text">1.2优点</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#1-3缺点"><span class="nav-number">2.1.3.</span> <span class="nav-text">1.3缺点</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2工厂方法"><span class="nav-number">2.2.</span> <span class="nav-text">2工厂方法</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#2-1适用场景"><span class="nav-number">2.2.1.</span> <span class="nav-text">2.1适用场景</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2-2优点"><span class="nav-number">2.2.2.</span> <span class="nav-text">2.2优点</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2-3缺点"><span class="nav-number">2.2.3.</span> <span class="nav-text">2.3缺点</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2-4源码中的体现"><span class="nav-number">2.2.4.</span> <span class="nav-text">2.4源码中的体现</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3抽象工厂"><span class="nav-number">2.3.</span> <span class="nav-text">3抽象工厂</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#3-1定义及适用场景"><span class="nav-number">2.3.1.</span> <span class="nav-text">3.1定义及适用场景</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#3-2优点"><span class="nav-number">2.3.2.</span> <span class="nav-text">3.2优点</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#3-3缺点"><span class="nav-number">2.3.3.</span> <span class="nav-text">3.3缺点</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#设计模式（课程笔记）"><span class="nav-number">1.</span> <span class="nav-text">设计模式（课程笔记）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建型设计模式"><span class="nav-number">2.</span> <span class="nav-text">创建型设计模式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1简单工厂（不属于23中GOF设计模式）"><span class="nav-number">2.1.</span> <span class="nav-text">1简单工厂（不属于23中GOF设计模式）</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#1-1适用场景"><span class="nav-number">2.1.1.</span> <span class="nav-text">1.1适用场景</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#1-2优点"><span class="nav-number">2.1.2.</span> <span class="nav-text">1.2优点</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#1-3缺点"><span class="nav-number">2.1.3.</span> <span class="nav-text">1.3缺点</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2工厂方法"><span class="nav-number">2.2.</span> <span class="nav-text">2工厂方法</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#2-1适用场景"><span class="nav-number">2.2.1.</span> <span class="nav-text">2.1适用场景</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2-2优点"><span class="nav-number">2.2.2.</span> <span class="nav-text">2.2优点</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2-3缺点"><span class="nav-number">2.2.3.</span> <span class="nav-text">2.3缺点</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2-4源码中的体现"><span class="nav-number">2.2.4.</span> <span class="nav-text">2.4源码中的体现</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3抽象工厂"><span class="nav-number">2.3.</span> <span class="nav-text">3抽象工厂</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#3-1定义及适用场景"><span class="nav-number">2.3.1.</span> <span class="nav-text">3.1定义及适用场景</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#3-2优点"><span class="nav-number">2.3.2.</span> <span class="nav-text">3.2优点</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#3-3缺点"><span class="nav-number">2.3.3.</span> <span class="nav-text">3.3缺点</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#建造者模式"><span class="nav-number">3.</span> <span class="nav-text">建造者模式</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#定义及适用范围"><span class="nav-number">3.0.1.</span> <span class="nav-text">定义及适用范围</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#优点"><span class="nav-number">3.0.2.</span> <span class="nav-text">优点</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#缺点"><span class="nav-number">3.0.3.</span> <span class="nav-text">缺点</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#单例模式"><span class="nav-number">4.</span> <span class="nav-text">单例模式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#定义"><span class="nav-number">4.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#适用范围"><span class="nav-number">4.2.</span> <span class="nav-text">适用范围</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#单例模式—-懒汉式"><span class="nav-number">4.3.</span> <span class="nav-text">单例模式—-懒汉式</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#单线程下的懒汉式"><span class="nav-number">4.3.1.</span> <span class="nav-text">单线程下的懒汉式</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#多线程下的懒汉式"><span class="nav-number">4.3.2.</span> <span class="nav-text">多线程下的懒汉式</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#懒汉式优缺点"><span class="nav-number">4.3.3.</span> <span class="nav-text">懒汉式优缺点</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#单线程下的饿汉式"><span class="nav-number">4.3.4.</span> <span class="nav-text">单线程下的饿汉式</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#多线程下的饿汉式"><span class="nav-number">4.3.5.</span> <span class="nav-text">多线程下的饿汉式</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#序列化破坏单例模式"><span class="nav-number">4.3.6.</span> <span class="nav-text">序列化破坏单例模式</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#防止反射攻击"><span class="nav-number">4.3.7.</span> <span class="nav-text">防止反射攻击</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#枚举单例"><span class="nav-number">4.3.8.</span> <span class="nav-text">枚举单例</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#容器单例"><span class="nav-number">4.3.9.</span> <span class="nav-text">容器单例</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -626,7 +687,7 @@ var jiathis_config={
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

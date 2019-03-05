@@ -82,14 +82,14 @@
 <meta name="description" content="一、编程规约（一）命名风格1、命名不能以下划线，美元符号开始或者结束。2、不允许出现拼音和中文的出现，除了国际通用名。3、类名使用UpperCameCase风格，但是DO/BO/DTO/VO/AO/PO/UID等例外。4、方法名、变量名、成员变量、局部变量统一使用lowerCamelCase风格，必须遵从驼峰形式。5、常量命名全部大写，单词间用下划线隔开，力求语义表达完整清除，不要嫌名字长。6、抽">
 <meta name="keywords" content="java,alibaba">
 <meta property="og:type" content="article">
-<meta property="og:title" content="alibaba java document">
+<meta property="og:title" content="阿里巴巴开发者手册学习记录">
 <meta property="og:url" content="http://yoursite.com/2018/09/29/里巴巴Java开发手册--抄写/index.html">
 <meta property="og:site_name" content="smith-dog">
 <meta property="og:description" content="一、编程规约（一）命名风格1、命名不能以下划线，美元符号开始或者结束。2、不允许出现拼音和中文的出现，除了国际通用名。3、类名使用UpperCameCase风格，但是DO/BO/DTO/VO/AO/PO/UID等例外。4、方法名、变量名、成员变量、局部变量统一使用lowerCamelCase风格，必须遵从驼峰形式。5、常量命名全部大写，单词间用下划线隔开，力求语义表达完整清除，不要嫌名字长。6、抽">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-10-30T16:49:56.576Z">
+<meta property="og:updated_time" content="2019-03-05T07:01:24.007Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="alibaba java document">
+<meta name="twitter:title" content="阿里巴巴开发者手册学习记录">
 <meta name="twitter:description" content="一、编程规约（一）命名风格1、命名不能以下划线，美元符号开始或者结束。2、不允许出现拼音和中文的出现，除了国际通用名。3、类名使用UpperCameCase风格，但是DO/BO/DTO/VO/AO/PO/UID等例外。4、方法名、变量名、成员变量、局部变量统一使用lowerCamelCase风格，必须遵从驼峰形式。5、常量命名全部大写，单词间用下划线隔开，力求语义表达完整清除，不要嫌名字长。6、抽">
 
 
@@ -126,7 +126,7 @@
 
 
 
-  <title>alibaba java document | smith-dog</title>
+  <title>阿里巴巴开发者手册学习记录 | smith-dog</title>
   
 
 
@@ -299,7 +299,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">alibaba java document</h1>
+          <h1 class="post-title" itemprop="name headline">阿里巴巴开发者手册学习记录</h1>
         
 
         <div class="post-meta">
@@ -362,7 +362,7 @@
 
           
           
-             <span id="/2018/09/29/里巴巴Java开发手册--抄写/" class="leancloud_visitors" data-flag-title="alibaba java document">
+             <span id="/2018/09/29/里巴巴Java开发手册--抄写/" class="leancloud_visitors" data-flag-title="阿里巴巴开发者手册学习记录">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -480,7 +480,7 @@
 <p>6、表单、ajax提交必须执行csrf安全验证。</p>
 <p>7、在使用平台资源，譬如短信、邮件、电话、下单、支付，必须实现正确的防重放的机制，如数量限制、疲劳度控制、验证码校验，避免被滥刷导致资源损耗。</p>
 <p>8、发贴、评论、发送即时消息等用户生成内容的场景必须实现防刷、文本内容违禁词过 滤等风控策略。 </p>
-<p>五、Mysql数据库<br>（一）建表规约</p>
+<h4 id="五、Mysql数据库"><a href="#五、Mysql数据库" class="headerlink" title="五、Mysql数据库"></a>五、Mysql数据库</h4><p>（一）建表规约</p>
 <p>1、表达是与否概念的字段，必须使用is_xxx的方式命名，数据类型unsigned tinyint（1表示是，0表示否）</p>
 <p>2、表名、字段名必须使用小写字母或者数字，禁止出现数字开头，禁止两个下划线中间只出现数字。数据库字段名的修改代价很大，因为无法进行预发布，所以字段名称需要慎重考虑。<br>说明：MySQL 在 Windows 下不区分大小写，但在 Linux 下默认是区分大小写。因此，数据库名、 表名、字段名，都不允许出现任何大写字母，避免节外生枝。 </p>
 <p>3、表名不适用复数名词。</p>
@@ -559,7 +559,7 @@
 <p>5、在代码中写分页查询逻辑时，若count为0应直接返回，避免执行后面的分页语句。</p>
 <p>6、不得使用外键，一切分页的概念必须在应用层解决。</p>
 <p>7、禁止使用存储过程</p>
-<p>考试记录：10月8号下午，天气晴，62分，用时30到40分左右，规范的细节把握不够，对二方库部分不熟</p>
+<p>考试记录：2018年10月8号下午，天气晴，62分，用时30到40分左右，规范的细节把握不够，对二方库部分不熟<br>考试记录：2019年2月19号凌晨，天气阴，80分，用时40分左右，二方库着重看了，数据库索引不熟<br>考试记录：2019年3月2号下午，天气阴，90分，用时30分左右，重新看了索引以及索引资料</p>
 
       
     </div>
@@ -600,14 +600,18 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/09/29/java8-action/" rel="next" title="lambda">
+                <i class="fa fa-chevron-left"></i> lambda
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/09/29/redis-深度历险（一）/" rel="prev" title="redis深度历险（一）">
-                redis深度历险（一） <i class="fa fa-chevron-right"></i>
+              <a href="/2018/09/29/redis-深度历险（一）/" rel="prev" title="redis学习笔记">
+                redis学习笔记 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -715,7 +719,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -737,7 +741,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -780,7 +784,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、编程规约"><span class="nav-number">1.</span> <span class="nav-text">一、编程规约</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#（一）命名风格"><span class="nav-number">1.1.</span> <span class="nav-text">（一）命名风格</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#（二）常量定义"><span class="nav-number">1.2.</span> <span class="nav-text">（二）常量定义</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#（三）代码格式"><span class="nav-number">1.3.</span> <span class="nav-text">（三）代码格式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#（四）OOP规约"><span class="nav-number">1.4.</span> <span class="nav-text">（四）OOP规约</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、异常日志"><span class="nav-number">2.</span> <span class="nav-text">二、异常日志</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三、单元测试"><span class="nav-number">3.</span> <span class="nav-text">三、单元测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#四、安全规约"><span class="nav-number">4.</span> <span class="nav-text">四、安全规约</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#一、编程规约"><span class="nav-number">1.</span> <span class="nav-text">一、编程规约</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#（一）命名风格"><span class="nav-number">1.1.</span> <span class="nav-text">（一）命名风格</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#（二）常量定义"><span class="nav-number">1.2.</span> <span class="nav-text">（二）常量定义</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#（三）代码格式"><span class="nav-number">1.3.</span> <span class="nav-text">（三）代码格式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#（四）OOP规约"><span class="nav-number">1.4.</span> <span class="nav-text">（四）OOP规约</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、异常日志"><span class="nav-number">2.</span> <span class="nav-text">二、异常日志</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三、单元测试"><span class="nav-number">3.</span> <span class="nav-text">三、单元测试</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#四、安全规约"><span class="nav-number">4.</span> <span class="nav-text">四、安全规约</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#五、Mysql数据库"><span class="nav-number">5.</span> <span class="nav-text">五、Mysql数据库</span></a></li></ol></div>
             
 
           </div>

@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="smith-dog">
 <meta property="og:description" content="线上问题总结由于项目版本上线频频出现一些问题，这里总结一下">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-10-30T16:49:56.560Z">
+<meta property="og:updated_time" content="2019-03-05T07:07:37.819Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="线上压测问题总结">
 <meta name="twitter:description" content="线上问题总结由于项目版本上线频频出现一些问题，这里总结一下">
@@ -373,8 +373,8 @@
 <li>变成要依赖接口，而不是具体实现。（无论线上紧急更换实现，还是线下变更，都是十分有好处的）</li>
 </ul>
 <h5 id="3、慢查询"><a href="#3、慢查询" class="headerlink" title="3、慢查询"></a>3、慢查询</h5><ul>
-<li>使用索引加快查询（rcms中未使用）</li>
-<li>使用redis，注意设置超时，淘汰策略等（rcms未使用）</li>
+<li>使用索引加快查询，联合索引的最左前缀匹配，以及利用索引排序，costs，eq_ref，ref，range，index，all。</li>
+<li>使用redis，注意设置超时，淘汰策略（rcms未使用）等</li>
 <li>优化sql语句，减少查询字段</li>
 </ul>
 <h5 id="4、并发"><a href="#4、并发" class="headerlink" title="4、并发"></a>4、并发</h5><ul>
@@ -413,8 +413,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/09/29/java8-action/" rel="next" title="lambda">
-                <i class="fa fa-chevron-left"></i> lambda
+              <a href="/2018/09/29/redis-深度历险（一）/" rel="next" title="redis学习笔记">
+                <i class="fa fa-chevron-left"></i> redis学习笔记
               </a>
             
           </div>
@@ -532,7 +532,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -554,7 +554,7 @@ var jiathis_config={
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

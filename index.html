@@ -281,6 +281,154 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/01/分布式锁的讨论/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="smith-dog">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="smith-dog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/03/01/分布式锁的讨论/" itemprop="url">分布式锁</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-01T13:49:19+08:00">
+                2019-03-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/03/01/分布式锁的讨论/" class="leancloud_visitors" data-flag-title="分布式锁">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>项目中需要监听broker的连接信息主题，用来确定设备上下线，原先使用设备主动发送上下文消息，但是这种方式无法保证消息准确地消费，尽管设备端，主题由官方提供AdvisorySupport.getConnectionAdvisoryTopic()，由于主题可能被多节点的服务订阅，不是队列的形式，官方似乎没有提供虚拟主题或者队列的形式用以监听连接信息。所以只能加锁，锁住程序监听的执行。<br>项目原先的形式是使用redis，但没有考虑原子性，查阅redis分布式锁的讨论，Martin Kleppmann认为zookeeper更适合作为分布式锁，redlock会有时间回拨的风险（尽管redis作者antirez认为可以忽略），但是zookeeper分布式锁的实现似乎更好，使用临时顺序节点的方式获取锁，避免zookeeper上节点竞争，没有时间回拨的问题和GC pause。</p>
+</blockquote>
+<h4 id="redis实现分布式锁"><a href="#redis实现分布式锁" class="headerlink" title="redis实现分布式锁"></a>redis实现分布式锁</h4><h5 id="jedis操作实现"><a href="#jedis操作实现" class="headerlink" title="jedis操作实现"></a>jedis操作实现</h5><p>redis分布式锁比较简单，可以使用redis直接加锁的形式，加锁和解锁都是原子性的。<br>加锁:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jedis.set(lockKey, requestId, SET_IF_NOT_EXIST, SET_WITH_EXPIRE_TIME, expireTime);</span><br></pre></td></tr></table></figure></p>
+<p>解锁:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">String script = &quot;if redis.call(&apos;get&apos;, KEYS[1]) == ARGV[1] then return redis.call(&apos;del&apos;, KEYS[1]) else return 0 end&quot;;</span><br><span class="line">        Object result = jedis.eval(script, Collections.singletonList(lockKey), Collections.singletonList(requestId));</span><br><span class="line"></span><br><span class="line">        if (RELEASE_SUCCESS.equals(result)) &#123;</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure></p>
+<h5 id="redission实现"><a href="#redission实现" class="headerlink" title="redission实现"></a>redission实现</h5><p>以下为官网的例子。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// 1. Create config object</span><br><span class="line">Config = ...</span><br><span class="line"></span><br><span class="line">// 2. Create Redisson instance</span><br><span class="line">RedissonClient redisson = Redisson.create(config);</span><br><span class="line"></span><br><span class="line">// 3. Get Redis based object or service you need</span><br><span class="line">RMap&lt;MyKey, MyValue&gt; map = redisson.getMap(&quot;myMap&quot;);</span><br><span class="line"></span><br><span class="line">RLock lock = redisson.getLock(&quot;myLock&quot;);</span><br><span class="line"></span><br><span class="line">RExecutorService executor = redisson.getExecutorService(&quot;myExecutorService&quot;);</span><br><span class="line"></span><br><span class="line">// over 30 different Redis based objects and services ...</span><br></pre></td></tr></table></figure></p>
+<h5 id="redlock-TODO"><a href="#redlock-TODO" class="headerlink" title="redlock(TODO)"></a>redlock(TODO)</h5><h4 id="zookeeper实现分布式锁"><a href="#zookeeper实现分布式锁" class="headerlink" title="zookeeper实现分布式锁"></a>zookeeper实现分布式锁</h4><h5 id="zookeeper提供的实现"><a href="#zookeeper提供的实现" class="headerlink" title="zookeeper提供的实现"></a>zookeeper提供的实现</h5><p>zookeeper分布式锁的实现,zookeeper提供了以下的实现步骤，另外还有共享锁的版本，提供了读锁和写锁的实现步骤。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Clients wishing to obtain a lock do the following:</span><br><span class="line"></span><br><span class="line">Call create( ) with a pathname of &quot;_locknode_/lock-&quot; and the sequence and ephemeral flags set.</span><br><span class="line"></span><br><span class="line">Call getChildren( ) on the lock node without setting the watch flag (this is important to avoid the herd effect).</span><br><span class="line"></span><br><span class="line">If the pathname created in step 1 has the lowest sequence number suffix, the client has the lock and the client exits the protocol.</span><br><span class="line"></span><br><span class="line">The client calls exists( ) with the watch flag set on the path in the lock directory with the next lowest sequence number.</span><br><span class="line"></span><br><span class="line">if exists( ) returns false, go to step 2. Otherwise, wait for a notification for the pathname from the previous step before going to step 2.</span><br></pre></td></tr></table></figure></p>
+<h5 id="项目中的实现"><a href="#项目中的实现" class="headerlink" title="项目中的实现"></a>项目中的实现</h5><p>根节点的创建，由于zookeeper的连接是异步的，所以用zookeeper的Watcher机制对zookeeper连接是否成功进行监听。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">try &#123;</span><br><span class="line">            zk = new ZooKeeper(config, sessionTimeout, new Watcher() &#123;</span><br><span class="line"></span><br><span class="line">                @Override</span><br><span class="line">                public void process(WatchedEvent event) &#123;</span><br><span class="line">                    // 建立连接</span><br><span class="line">                    if (event.getState() == KeeperState.SyncConnected) &#123;</span><br><span class="line">                        connectedSignal.countDown();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">            // 连接完成前进行阻塞</span><br><span class="line">            connectedSignal.await();</span><br><span class="line">            Stat stat = zk.exists(root, false);</span><br><span class="line">            if (null == stat) &#123;</span><br><span class="line">                // 创建根节点</span><br><span class="line">                zk.create(root, data, ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; catch (Exception e) &#123;</span><br><span class="line">            throw new RuntimeException(e);</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure></p>
+<p>lock方法,创建的每个临时顺序子节点会监听前一个节点被删除的消息，仍然使用watch机制，由于是一个节点等待另外一个节点，可以使用CountDownLatch锁住，只要在watch的监听方法让程序继续执行就行。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">// 创建临时子节点</span><br><span class="line">  String myNode = zk.create(root + &quot;/&quot; + lockName , data, ZooDefs.Ids.OPEN_ACL_UNSAFE,CreateMode.EPHEMERAL_SEQUENTIAL);</span><br><span class="line"></span><br><span class="line">// 取出所有子节点</span><br><span class="line">List&lt;String&gt; subNodes = zk.getChildren(root, false);</span><br><span class="line">TreeSet&lt;String&gt; sortedNodes = new TreeSet&lt;&gt;();</span><br><span class="line">for(String node :subNodes) &#123;</span><br><span class="line">	sortedNodes.add(root +&quot;/&quot; +node);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">String smallNode = sortedNodes.first();</span><br><span class="line">String preNode = sortedNodes.lower(myNode);</span><br><span class="line"></span><br><span class="line">if (myNode.equals( smallNode)) &#123;</span><br><span class="line">	// 如果是最小的节点,则表示取得锁</span><br><span class="line">	this.nodeId.set(myNode);</span><br><span class="line">	return;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">CountDownLatch latch = new CountDownLatch(1);</span><br><span class="line">Stat stat = zk.exists(preNode, new LockWatcher(latch));// 同时注册监听。</span><br><span class="line">// 判断比自己小一个数的节点是否存在,如果不存在则无需等待锁,同时注册监听</span><br><span class="line">if (stat != null) &#123;</span><br><span class="line">// 等待，这里应该一直等待其他线程释放锁</span><br><span class="line">latch.await();</span><br><span class="line">nodeId.set(myNode);</span><br><span class="line">latch = null;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>unlock方法，只需要移除节点，下一个节点的程序就会监听到相关的消息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if (null != nodeId) &#123;</span><br><span class="line">    zk.delete(nodeId.get(), -1);</span><br><span class="line">&#125;</span><br><span class="line">nodeId.remove();</span><br></pre></td></tr></table></figure></p>
+<h4 id="博客之间的激烈讨论"><a href="#博客之间的激烈讨论" class="headerlink" title="博客之间的激烈讨论"></a>博客之间的激烈讨论</h4><p>两篇博客详细地讨论了这些问题，大佬之间的大战，主要围绕GC，时间回拨等几个问题，涉及到流程等。<br><a href="https://mp.weixin.qq.com/s/JTsJCDuasgIJ0j95K8Ay8w" target="_blank" rel="noopener">https://mp.weixin.qq.com/s/JTsJCDuasgIJ0j95K8Ay8w</a><br><a href="https://mp.weixin.qq.com/s/4CUe7OpM6y1kQRK8TOC_qQ" target="_blank" rel="noopener">https://mp.weixin.qq.com/s/4CUe7OpM6y1kQRK8TOC_qQ</a></p>
+<h4 id="场景权衡"><a href="#场景权衡" class="headerlink" title="场景权衡"></a>场景权衡</h4><p>参考</p>
+<ul>
+<li><a href="https://wudashan.cn/2017/10/23/Redis-Distributed-Lock-Implement/" target="_blank" rel="noopener">https://wudashan.cn/2017/10/23/Redis-Distributed-Lock-Implement/</a></li>
+<li><a href="https://github.com/redisson/redisson" target="_blank" rel="noopener">https://github.com/redisson/redisson</a></li>
+<li><a href="https://mp.weixin.qq.com/s/JTsJCDuasgIJ0j95K8Ay8w" target="_blank" rel="noopener">https://mp.weixin.qq.com/s/JTsJCDuasgIJ0j95K8Ay8w</a></li>
+<li><a href="https://mp.weixin.qq.com/s/4CUe7OpM6y1kQRK8TOC_qQ" target="_blank" rel="noopener">https://mp.weixin.qq.com/s/4CUe7OpM6y1kQRK8TOC_qQ</a></li>
+</ul>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/21/rabbitMQ精讲/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -312,7 +460,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-21T12:04:13+08:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-21T12:04:00+08:00">
                 2018-12-21
               </time>
             
@@ -362,8 +510,7 @@
 
       
         
-          <p>[TOC]</p>
-<h4 id="RabbitMQ"><a href="#RabbitMQ" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h4><blockquote>
+          <h4 id="RabbitMQ"><a href="#RabbitMQ" class="headerlink" title="RabbitMQ"></a>RabbitMQ</h4><blockquote>
 <p>与SpringAMQP完美结合、API丰富<br>集群模式丰富，表达式配置，HA模式，镜像队列模型<br>保证数据不丢失的前提做到高可靠性、可用性</p>
 </blockquote>
           <!--noindex-->
@@ -573,7 +720,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/11/12/写代码碰到的问题/" itemprop="url">写代码碰到的问题</a></h1>
+                <a class="post-title-link" href="/2018/11/12/写代码碰到的问题/" itemprop="url">项目问题排查记录</a></h1>
         
 
         <div class="post-meta">
@@ -603,7 +750,7 @@
 
           
           
-             <span id="/2018/11/12/写代码碰到的问题/" class="leancloud_visitors" data-flag-title="写代码碰到的问题">
+             <span id="/2018/11/12/写代码碰到的问题/" class="leancloud_visitors" data-flag-title="项目问题排查记录">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1235,179 +1382,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/29/java8-action/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="smith-dog">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/head.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="smith-dog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/29/java8-action/" itemprop="url">lambda</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-29T22:26:01+08:00">
-                2018-09-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java/" itemprop="url" rel="index">
-                    <span itemprop="name">java</span>
-                  </a>
-                </span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java/java8-in-Action/" itemprop="url" rel="index">
-                    <span itemprop="name">java8 in Action</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-             <span id="/2018/09/29/java8-action/" class="leancloud_visitors" data-flag-title="lambda">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">Visitors&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <blockquote>
-<p><a href="http://www.runoob.com/java/java8-new-features.html" target="_blank" rel="noopener">http://www.runoob.com/java/java8-new-features.html</a></p>
-</blockquote>
-<blockquote>
-<p>Java8 action</p>
-</blockquote>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/09/29/java8-action/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/29/redis-深度历险（一）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1427,7 +1401,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/09/29/redis-深度历险（一）/" itemprop="url">redis深度历险（一）</a></h1>
+                <a class="post-title-link" href="/2018/09/29/redis-深度历险（一）/" itemprop="url">redis学习笔记</a></h1>
         
 
         <div class="post-meta">
@@ -1490,7 +1464,7 @@
 
           
           
-             <span id="/2018/09/29/redis-深度历险（一）/" class="leancloud_visitors" data-flag-title="redis深度历险（一）">
+             <span id="/2018/09/29/redis-深度历险（一）/" class="leancloud_visitors" data-flag-title="redis学习笔记">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1596,7 +1570,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/09/29/里巴巴Java开发手册--抄写/" itemprop="url">alibaba java document</a></h1>
+                <a class="post-title-link" href="/2018/09/29/里巴巴Java开发手册--抄写/" itemprop="url">阿里巴巴开发者手册学习记录</a></h1>
         
 
         <div class="post-meta">
@@ -1659,7 +1633,7 @@
 
           
           
-             <span id="/2018/09/29/里巴巴Java开发手册--抄写/" class="leancloud_visitors" data-flag-title="alibaba java document">
+             <span id="/2018/09/29/里巴巴Java开发手册--抄写/" class="leancloud_visitors" data-flag-title="阿里巴巴开发者手册学习记录">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -1735,6 +1709,10 @@
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
 
 
           </div>
@@ -1782,7 +1760,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1804,7 +1782,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

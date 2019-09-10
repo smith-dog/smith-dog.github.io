@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="smith-dog">
 <meta property="og:description" content="http://www.runoob.com/java/java8-new-features.html   Java8 action">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-02-12T07:15:16.317Z">
+<meta property="og:updated_time" content="2019-05-14T07:58:34.261Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="lambda">
 <meta name="twitter:description" content="http://www.runoob.com/java/java8-new-features.html   Java8 action">
@@ -403,7 +403,7 @@
 <blockquote>
 <p>单纯做一些使用lambda的记录</p>
 </blockquote>
-<h5 id="lambda"><a href="#lambda" class="headerlink" title="lambda"></a>lambda</h5><h6 id="list-转-map"><a href="#list-转-map" class="headerlink" title="list 转 map"></a>list 转 map</h6><p>List<account> accounts<br>accounts.stream().collect(Collectors.toMap(Account::getId, Account::getUsername));<br>Map&lt;Long, String&gt;</account></p>
+<h4 id="stream"><a href="#stream" class="headerlink" title="stream"></a>stream</h4><h5 id="map"><a href="#map" class="headerlink" title="map"></a>map</h5><h5 id="fifter"><a href="#fifter" class="headerlink" title="fifter"></a>fifter</h5><h5 id="sort"><a href="#sort" class="headerlink" title="sort"></a>sort</h5><h5 id="match"><a href="#match" class="headerlink" title="match"></a>match</h5><h6 id="list-转-map"><a href="#list-转-map" class="headerlink" title="list 转 map"></a>list 转 map</h6><p>List<account> accounts<br>accounts.stream().collect(Collectors.toMap(Account::getId, Account::getUsername));<br>Map&lt;Long, String&gt;</account></p>
 <p>accounts.stream().collect(Collectors.toMap(Account::getId, account -&gt; account));<br>Map&lt;Long, Account&gt;</p>
 <p>重复key的情况<br>代码如下：</p>
 <p>public Map&lt;String, Account&gt; getNameAccountMap(List<account> accounts) {<br>    return accounts.stream().collect(Collectors.toMap(Account::getUsername, Function.identity()));<br>}<br>这个方法可能报错（java.lang.IllegalStateException: Duplicate key），因为name是有可能重复的。toMap有个重载方法，可以传入一个合并的函数来解决key冲突问题：</account></p>
@@ -412,6 +412,7 @@
 <p>public Map&lt;String, Account&gt; getNameAccountMap(List<account> accounts) {<br>    return accounts.stream().collect(Collectors.toMap(Account::getUsername, Function.identity(), (key1, key2) -&gt; key2, LinkedHashMap::new));<br>}</account></p>
 <h6 id="map-values转list"><a href="#map-values转list" class="headerlink" title="map-values转list"></a>map-values转list</h6><p>Map&lt;Long, Account&gt; accounts<br>List<account> </account></p>
 <p>简单的装换，以及定义排序规则<br>accounts.values().stream().sorted(Comparator.comparing(Account::getId)).collect(Collectors.toList());</p>
+<h4 id="optional"><a href="#optional" class="headerlink" title="optional"></a>optional</h4><p>##### </p>
 
       
     </div>
@@ -458,8 +459,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/09/29/里巴巴Java开发手册--抄写/" rel="prev" title="阿里巴巴开发者手册学习记录">
-                阿里巴巴开发者手册学习记录 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/09/29/redis-深度历险（一）/" rel="prev" title="redis学习笔记">
+                redis学习笔记 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -567,7 +568,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -632,7 +633,7 @@ var jiathis_config={
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#lambda"><span class="nav-number">1.</span> <span class="nav-text">lambda</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#list-转-map"><span class="nav-number">1.1.</span> <span class="nav-text">list 转 map</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#map-values转list"><span class="nav-number">1.2.</span> <span class="nav-text">map-values转list</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#stream"><span class="nav-number">1.</span> <span class="nav-text">stream</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#map"><span class="nav-number">1.1.</span> <span class="nav-text">map</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#fifter"><span class="nav-number">1.2.</span> <span class="nav-text">fifter</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#sort"><span class="nav-number">1.3.</span> <span class="nav-text">sort</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#match"><span class="nav-number">1.4.</span> <span class="nav-text">match</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#list-转-map"><span class="nav-number">1.4.1.</span> <span class="nav-text">list 转 map</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#map-values转list"><span class="nav-number">1.4.2.</span> <span class="nav-text">map-values转list</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#optional"><span class="nav-number">2.</span> <span class="nav-text">optional</span></a></li></ol></div>
             
 
           </div>

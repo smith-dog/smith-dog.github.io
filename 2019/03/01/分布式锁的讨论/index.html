@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="smith-dog">
 <meta property="og:description" content="项目中需要监听broker的连接信息主题，用来确定设备上下线，原先使用设备主动发送上下文消息，但是这种方式无法保证消息准确地消费，尽管设备端，主题由官方提供AdvisorySupport.getConnectionAdvisoryTopic()，由于主题可能被多节点的服务订阅，不是队列的形式，官方似乎没有提供虚拟主题或者队列的形式用以监听连接信息。所以只能加锁，锁住程序监听的执行。项目原先的形式">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-03-05T07:09:27.457Z">
+<meta property="og:updated_time" content="2019-09-10T15:38:38.463Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="分布式锁">
 <meta name="twitter:description" content="项目中需要监听broker的连接信息主题，用来确定设备上下线，原先使用设备主动发送上下文消息，但是这种方式无法保证消息准确地消费，尽管设备端，主题由官方提供AdvisorySupport.getConnectionAdvisoryTopic()，由于主题可能被多节点的服务订阅，不是队列的形式，官方似乎没有提供虚拟主题或者队列的形式用以监听连接信息。所以只能加锁，锁住程序监听的执行。项目原先的形式">
@@ -362,6 +362,7 @@
         <blockquote>
 <p>项目中需要监听broker的连接信息主题，用来确定设备上下线，原先使用设备主动发送上下文消息，但是这种方式无法保证消息准确地消费，尽管设备端，主题由官方提供AdvisorySupport.getConnectionAdvisoryTopic()，由于主题可能被多节点的服务订阅，不是队列的形式，官方似乎没有提供虚拟主题或者队列的形式用以监听连接信息。所以只能加锁，锁住程序监听的执行。<br>项目原先的形式是使用redis，但没有考虑原子性，查阅redis分布式锁的讨论，Martin Kleppmann认为zookeeper更适合作为分布式锁，redlock会有时间回拨的风险（尽管redis作者antirez认为可以忽略），但是zookeeper分布式锁的实现似乎更好，使用临时顺序节点的方式获取锁，避免zookeeper上节点竞争，没有时间回拨的问题和GC pause。</p>
 </blockquote>
+<a id="more"></a>
 <h4 id="redis实现分布式锁"><a href="#redis实现分布式锁" class="headerlink" title="redis实现分布式锁"></a>redis实现分布式锁</h4><h5 id="jedis操作实现"><a href="#jedis操作实现" class="headerlink" title="jedis操作实现"></a>jedis操作实现</h5><p>redis分布式锁比较简单，可以使用redis直接加锁的形式，加锁和解锁都是原子性的。<br>加锁:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jedis.set(lockKey, requestId, SET_IF_NOT_EXIST, SET_WITH_EXPIRE_TIME, expireTime);</span><br></pre></td></tr></table></figure></p>
 <p>解锁:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">String script = &quot;if redis.call(&apos;get&apos;, KEYS[1]) == ARGV[1] then return redis.call(&apos;del&apos;, KEYS[1]) else return 0 end&quot;;</span><br><span class="line">        Object result = jedis.eval(script, Collections.singletonList(lockKey), Collections.singletonList(requestId));</span><br><span class="line"></span><br><span class="line">        if (RELEASE_SUCCESS.equals(result)) &#123;</span><br><span class="line">            return true;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure></p>
 <h5 id="redission实现"><a href="#redission实现" class="headerlink" title="redission实现"></a>redission实现</h5><p>以下为官网的例子。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// 1. Create config object</span><br><span class="line">Config = ...</span><br><span class="line"></span><br><span class="line">// 2. Create Redisson instance</span><br><span class="line">RedissonClient redisson = Redisson.create(config);</span><br><span class="line"></span><br><span class="line">// 3. Get Redis based object or service you need</span><br><span class="line">RMap&lt;MyKey, MyValue&gt; map = redisson.getMap(&quot;myMap&quot;);</span><br><span class="line"></span><br><span class="line">RLock lock = redisson.getLock(&quot;myLock&quot;);</span><br><span class="line"></span><br><span class="line">RExecutorService executor = redisson.getExecutorService(&quot;myExecutorService&quot;);</span><br><span class="line"></span><br><span class="line">// over 30 different Redis based objects and services ...</span><br></pre></td></tr></table></figure></p>
@@ -528,7 +529,7 @@ var jiathis_config={
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -613,7 +614,7 @@ var jiathis_config={
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

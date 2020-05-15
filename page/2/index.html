@@ -281,6 +281,420 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/01/测试/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="smith-dog">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="smith-dog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/01/测试/" itemprop="url">需求设计</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-01T17:06:25+08:00">
+                2018-11-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/11/01/测试/" class="leancloud_visitors" data-flag-title="需求设计">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h4 id="物联网设备接入请求"><a href="#物联网设备接入请求" class="headerlink" title="物联网设备接入请求"></a>物联网设备接入请求</h4><blockquote>
+<p>设备的接入校验可以是与烧录的编号有关，或者与包装的编号，再或者是由管理员账号统一进行接入。<br>1、接入考虑主要是限制接口的多次访问<br>2、防止broker地址泄露</p>
+</blockquote>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/11/01/测试/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/18/从linux部署迁移到docker部署/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="smith-dog">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="smith-dog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/18/从linux部署迁移到docker部署/" itemprop="url">从linux部署迁移到docker部署</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-18T11:20:25+08:00">
+                2018-10-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/10/18/从linux部署迁移到docker部署/" class="leancloud_visitors" data-flag-title="从linux部署迁移到docker部署">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>最近公司要用到的测试环境多，变化也多，干脆就直接从linux迁移到docker，服务的部署也很快</p>
+</blockquote>
+<h4 id="docker环境"><a href="#docker环境" class="headerlink" title="docker环境"></a>docker环境</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">yum -y install docker</span><br><span class="line"># 开启docker</span><br><span class="line">service docker start</span><br><span class="line"># 设置开机启动</span><br><span class="line">systemctl enable docker</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/10/18/从linux部署迁移到docker部署/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/10/日志框架变更记录log4j-logback/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="smith-dog">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/head.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="smith-dog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/10/日志框架变更记录log4j-logback/" itemprop="url">日志框架变更记录log4j--->logback</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-10T14:43:01+08:00">
+                2018-10-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/10/10/日志框架变更记录log4j-logback/" class="leancloud_visitors" data-flag-title="日志框架变更记录log4j--->logback">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>logback<br>author: smith-dog<br>date: 2018-10-10 14:43:01</p>
+</blockquote>
+<h2 id="tags"><a href="#tags" class="headerlink" title="tags:"></a>tags:</h2><h5 id="项目实现从log4j到logback转换"><a href="#项目实现从log4j到logback转换" class="headerlink" title="项目实现从log4j到logback转换"></a>项目实现从log4j到logback转换</h5><blockquote>
+<p>附上logback官网，选择logback的原因<br><a href="https://logback.qos.ch/reasonsToSwitch.html" target="_blank" rel="noopener">https://logback.qos.ch/reasonsToSwitch.html</a><br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/10/10/日志框架变更记录log4j-logback/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/10/08/线上压测问题总结/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -847,7 +1261,9 @@
 <p>zunionstore</p>
 <p>总结</p>
 <p>操作类型 | 命令<br>基本操作 | zadd zrem zcard zincrby zscore<br>范围操作 | zrange zrangebyscore zcount zremrangebyrank<br>集合操作 | zunionstore zinterstore</p>
-<h4 id="stream"><a href="#stream" class="headerlink" title="stream"></a>stream</h4><h4 id="Bitmaps（位图）"><a href="#Bitmaps（位图）" class="headerlink" title="Bitmaps（位图）"></a>Bitmaps（位图）</h4><h4 id="HyperLogLog"><a href="#HyperLogLog" class="headerlink" title="HyperLogLog"></a>HyperLogLog</h4><h2 id="redis的数据结构内部b"><a href="#redis的数据结构内部b" class="headerlink" title="redis的数据结构内部b"></a>redis的数据结构内部b</h2><h4 id="string底层结构"><a href="#string底层结构" class="headerlink" title="string底层结构"></a>string底层结构</h4><p>　Redis 是一个开源的使用ANSI C语言编写的key-value 数据库，我们可能会较为主观的认为 Redis 中的字符串就是采用了C语言中的传统字符串表示，但其实不然，Redis 没有直接使用C语言传统的字符串表示，而是自己构建了一种名为简单动态字符串（simple dynamic string SDS）的抽象类型，并将SDS用作Redis 的默认字符串表示。</p>
+<h4 id="stream"><a href="#stream" class="headerlink" title="stream"></a>stream</h4><h4 id="Bitmaps（位图）"><a href="#Bitmaps（位图）" class="headerlink" title="Bitmaps（位图）"></a>Bitmaps（位图）</h4><p>延伸:roaring bitmap<br>特点:ArrayContainer,BitmapContainer,RunContainer（行程长度压缩算法）<br>根据数据大小分段处理<br>需要手动调用runOptimize()才能进行RunContainer优化</p>
+<h4 id="HyperLogLog"><a href="#HyperLogLog" class="headerlink" title="HyperLogLog"></a>HyperLogLog</h4><h4 id="lua"><a href="#lua" class="headerlink" title="lua"></a>lua</h4><p>redis是支持lua脚本的，提供了eval和evalsha两个指令用于执行lua脚本<br>两者区别在于eval是eval是传递lua文件到服务端执行，服务端不会保存该脚本<br>evalsha在执行前需要调用script load 将脚本发送到服务端，服务端保存该脚本，服务端返回sha哈希字段，evalsha参数使用sha字段进行调用，可以使用script exists判断服务端是否已加载该脚本，script flush清理所有的脚本。<br>script kill可以杀掉正在执行的lua脚本（如果脚本正在执行写操作，那么kill命令无效！）。</p>
+<h2 id="redis的数据结构内部"><a href="#redis的数据结构内部" class="headerlink" title="redis的数据结构内部"></a>redis的数据结构内部</h2><h4 id="string底层结构"><a href="#string底层结构" class="headerlink" title="string底层结构"></a>string底层结构</h4><p>　Redis 是一个开源的使用ANSI C语言编写的key-value 数据库，我们可能会较为主观的认为 Redis 中的字符串就是采用了C语言中的传统字符串表示，但其实不然，Redis 没有直接使用C语言传统的字符串表示，而是自己构建了一种名为简单动态字符串（simple dynamic string SDS）的抽象类型，并将SDS用作Redis 的默认字符串表示。</p>
 <p>设置一个<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">- 键（key）是一个字符串对象，对象的底层实现是一个保存着字符串“msg” 的SDS，</span><br><span class="line">- 值（value）也是一个字符串对象，对象的底层实现是一个保存着字符串“hello world” 的SDS。</span><br><span class="line">	从上述例子，我们可以很直观的看到我们在平常使用redis 的时候，创建的字符串到底是一个什么样子的数据类型。除了用来保存字符串以外，SDS还被用作缓冲区（buffer）AOF模块中的AOF缓冲区。</span><br><span class="line"></span><br><span class="line">#### SDS底层定义</span><br></pre></td></tr></table></figure></p>
 <p>/*  </p>
 <ul>
@@ -876,7 +1292,12 @@
 <h6 id="惰性空间释放"><a href="#惰性空间释放" class="headerlink" title="惰性空间释放"></a>惰性空间释放</h6><p>　　　　我们在观察SDS 的结构的时候可以看到里面的free 属性，是用于记录空余空间的。我们除了在拓展字符串的时候会使用到free 来进行记录空余空间以外，在对字符串进行收缩的时候，我们也可以使用free 属性来进行记录剩余空间，这样做的好处就是避免下次对字符串进行再次修改的时候，需要对字符串的空间进行拓展。</p>
 <p>　　　　然而，我们并不是说不能释放SDS 中空余的空间，SDS 提供了相应的API，让我们可以在有需要的时候，自行释放SDS 的空余空间。</p>
 <p>　　　　通过惰性空间释放，SDS 避免了缩短字符串时所需的内存重分配操作，并未将来可能有的增长操作提供了优化</p>
-
+<h2 id="集合内部编码"><a href="#集合内部编码" class="headerlink" title="集合内部编码"></a>集合内部编码</h2><h3 id="ziplist"><a href="#ziplist" class="headerlink" title="ziplist"></a>ziplist</h3><p>  实际上ziplist并不是一个真正意义上的list，而是将list内部的元素头尾相连拼接成一个字符串，所以使用的内存自然变少，但是在元素较多的情况下，它的效率并不是很高，需要结合实际的情况进行使用，合理使用可以降低大量内存。</p>
+<h3 id="skiplist"><a href="#skiplist" class="headerlink" title="skiplist"></a>skiplist</h3><pre><code>redis使用跳表作为集合的第二种实现。
+</code></pre><blockquote>
+<p>关于跳表，作者的意思：<br>There are a few reasons:1) They are not very memory intensive. It’s up to you basically. Changing parameters about the probability of a node to have a given number of levels will make then less memory intensive than btrees.2) A sorted set is often target of many ZRANGE or ZREVRANGE operations, that is, traversing the skip list as a linked list. With this operation the cache locality of skip lists is at least as good as with other kind of balanced trees.3) They are simpler to implement, debug, and so forth. For instance thanks to the skip list simplicity I received a patch (already in Redis master) with augmented skip lists implementing ZRANK in O(log(N)). It required little changes to the code.About the Append Only durability &amp; speed, I don’t think it is a good idea to optimize Redis at cost of more code and more complexity for a use case that IMHO should be rare for the Redis target (fsync() at every command). Almost no one is using this feature even with ACID SQL databases, as the performance hint is big anyway.About threads: our experience shows that Redis is mostly I/O bound. I’m using threads to serve things from Virtual Memory. The long term solution to exploit all the cores, assuming your link is so fast that you can saturate a single core, is running multiple instances of Redis (no locks, almost fully scalable linearly with number of cores), and using the “Redis Cluster” solution that I plan to develop in the future.</p>
+</blockquote>
+<h3 id="quistlist"><a href="#quistlist" class="headerlink" title="quistlist"></a>quistlist</h3>
           
         
       
@@ -1138,7 +1559,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">17</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1207,7 +1628,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
